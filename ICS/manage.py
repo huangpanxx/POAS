@@ -1,12 +1,14 @@
 #!/usr/bin/env python
+#coding:utf8
 from django.core.management import execute_manager
 try:
-    from web import settings
+    from common.settings import django_settings
 except ImportError:
     import sys
-    sys.stderr.write("Error: Can't find the file 'settings.py' in the directory containing %r. It appears you've customized things.\nYou'll have to run django-admin.py, passing it your settings module.\n" % __file__)
+    error = '''加载Django配置文件失败'''
+    sys.stderr.write(error)
     sys.exit(1)
 
 
 if __name__ == "__main__":
-    execute_manager(settings)
+    execute_manager(django_settings)

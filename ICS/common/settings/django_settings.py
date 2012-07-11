@@ -1,7 +1,14 @@
+'''
+Created on 2012-7-10
+
+@author: snail
+'''
+
+
 # Django settings for Web project.
 
-from model.django_settings import DATABASES as _DATABASES
-from model.django_settings import INSTALLED_APPS as _INSTALLED_APPS
+from common.settings.settings import DATABASES as _DATABASES
+from common.settings.settings import INSTALLED_APPS as _INSTALLED_APPS
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -113,7 +120,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-	   'web.service',
+       'web.service',
 )
 
 INSTALLED_APPS += _INSTALLED_APPS
