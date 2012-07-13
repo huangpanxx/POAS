@@ -2,24 +2,11 @@
 
 import urllib2
 import re
-import chardet
-
-def writeFile(path, text):
-	f = open(path, 'w')
-	f.write(text)
-	f.close()
+from crawl.utils.charset import decodeHtml
 
 
-def getHtml(url):
-	opener = urllib2.urlopen(url)
-	data = opener.read()
-	char = chardet.detect(data)
-	char = char['encoding']
-	if char:
-		data = unicode(data, char, 'ignore').encode('utf-8')
-	return data
 
-	
+#提取纯文本
 def preProcess(html):
 	#去除无用信息
 	html = re.sub(r"(?s)\s*<!DOCTYPE.*?>", '', html)
@@ -27,7 +14,7 @@ def preProcess(html):
 	html = re.sub(r"(?s)\s*<script.*?>.*?</script>", '', html)
 	html = re.sub(r"(?s)\s*<style.*?>.*?</style>", '', html)
 	html = re.sub(r"&.{2,5};|&#.{2,5};", '', html)
-	html = re.sub(r"(?s)\s<img.*?>.*?</img>",'',html)
+	html = re.sub(r"(?s)\s<img.*?>.*?</img>", '', html)
 
 	#段落处理(缩进)
 	lines = re.split(r'(?i)\s*<p(\s.*?)?>', html) #p pre
@@ -43,12 +30,13 @@ def preProcess(html):
 
 		value = re.sub(r"(?is)</.*?>\s*", '', value) #末标签不换行
 		value = re.sub(r"(?is)<.*?>\s*", '\n', value) #首标签换行
-		lines[i] = value.strip()
+		lines[i] = unicode(value,'utf-8','ignore').strip().encode('utf-8')
 
-	html = '\n\t'.join([i for i in lines]) #<p>标签换行空格
+	html = '\r\n\t'.join([i for i in lines]) #<p>标签换行空格
 
-	return html.strip()
+	return html
 
+#依据行分布提取正文
 def getText(html, blocksWidth=2, threshold=150):
 
 	_lines = html.split('\n')
@@ -104,14 +92,32 @@ def getText(html, blocksWidth=2, threshold=150):
 
 			_str = ''.join(tmp)
 
+			ls = _str.splitlines()
+			start = -1
+			for i in range(len(ls)):
+				if ls[i].startswith('\t'):
+					start = i
+					break
+			
+			end = -1
+			for i in range(len(ls)-1,0,-1):
+				if ls[i].startwith('\t'):
+					end = i
+					break
+			
+			if start==-1:
+				_str = ''
+			else:
+				_str = '\r\n'.join(ls[start:end+1])
+	
 			if len(_str) > len(text):
 				text = _str
 
 	return text
 
 def getDateTime(text):
-	patterns = (
-			r'\d{4}-\d{2}-\d{2}(\s+\d{2}:\d{2})?',
+	patterns = ( 
+			'\d{4}-\d{2}-\d{2}(\s+\d{2}:\d{2})?',
 			r'\d{4}年\d{2}月\d{2}日(\s+\d{2}:\d{2})?',
 			r'\d{4}/\d{1,2}/\d{1,2}(\s+\d{2}:\d{2})?',
 			)
@@ -132,7 +138,7 @@ def getCommentNbr(text):
 			r'(\d+)人参与',
 			r'(\d+)人评论',)
 	for p in patterns:
-		m = re.search(p,text)
+		m = re.search(p, text)
 		if m:
 			return m.group(1)
 	return None
@@ -148,12 +154,25 @@ def parseHtml(html, blocksWidth=3, threshold=100):
 			'datetime':datetime,
 			'text':text,
 			'commentNbr':commentNbr}
-
-def printDict(dic):
-	for key, value in dic.items():
-		print '%s:%s' % (key, value)
+	
 
 if __name__ == '__main__':
+	def getHtml(url):
+		opener = urllib2.urlopen(url)
+		data = opener.read()
+		html = decodeHtml(data)
+		return html
+		
+
+	def printDict(dic):
+		for key, value in dic.items():
+			print '%s:%s' % (key, value)
+		
+	def writeFile(path, text):
+		f = open(path, 'w')
+		f.write(text)
+		f.close()
+
 	#url = 'http://ent.qq.com/a/20100417/000119.htm'
 	#url = 'http://mil.news.sina.com.cn/2012-07-11/1056695377.html'
 	#url = 'http://www.top81.com.cn/2012/0711/3639.htm'
@@ -162,7 +181,7 @@ if __name__ == '__main__':
 	#url = 'http://lssnail.tk'
 	#url = 'http://news.sina.com.cn/c/2012-07-10/213524748852.shtml'
 	url = 'http://news.ifeng.com/mainland/special/diaoyudaozhengduan/content-3/detail_2012_07/09/15885116_0.shtml'
-
+	
 	html = getHtml(url)
 	info = parseHtml(html)
 	printDict(info)

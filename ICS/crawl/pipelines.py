@@ -35,6 +35,9 @@ def _default(obj):
  
 class JsonPipeline(object): 
     def process_item(self,item,spider):
+        if not item['title']:
+            raise DropItem()
+        
         d = dict(item)
         chunks = []
         for key,value in d.items():
@@ -43,7 +46,9 @@ class JsonPipeline(object):
                 
         line =  '\r\n'.join(chunks)
             
-        f = open('data/%s' % item['title'],'w')
+        uuid = item['uuid']
+        
+        f = open(r'data/%s' % uuid,'w')
         
         f.write(line+'\r\n')
         
