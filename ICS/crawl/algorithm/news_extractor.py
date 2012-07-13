@@ -101,7 +101,7 @@ def getText(html, blocksWidth=2, threshold=150):
 			
 			end = -1
 			for i in range(len(ls)-1,0,-1):
-				if ls[i].startwith('\t'):
+				if ls[i].startswith('\t'):
 					end = i
 					break
 			
