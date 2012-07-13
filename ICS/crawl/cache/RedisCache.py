@@ -8,9 +8,12 @@ from common.settings import settings
     
 r = redis.Redis(host = settings.REDIS_HOST,port = settings.REDIS_PORT)
 
-def checkDumplicated(self,url):
-    flag = self.r.hexists(self.name,url)
+def checkDumplicated(dicName,url):
+    flag = r.hexists(dicName,url)
     if not flag:
-        self.r.hset(self.name, url,1)
-        return flag
+        r.hset(dicName, url,1)
+    return flag
+
+def clearCache(dicName):
+    r.delete(dicName)
     

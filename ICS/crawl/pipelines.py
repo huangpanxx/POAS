@@ -6,7 +6,6 @@
 
 from common.model.models import CrawlModel
 from scrapy.exceptions import DropItem
-import json
 
 class CrawlPipeline(object):
     def __init__(self):
@@ -22,11 +21,33 @@ class CrawlPipeline(object):
         item.save()
         return item
 
+
+from datetime import date,datetime
+#import json
+
+def _default(obj):
+    if isinstance(obj,datetime):
+        return unicode(obj.strftime(u'%Y-%m-%dT%H:%M:%S'))
+    elif isinstance(obj,date):
+        return unicode(obj.strftime(u'%Y-%m-%d'))
+    else:
+        raise TypeError('%r is not JSON serializable' % obj)
+ 
 class JsonPipeline(object): 
-    def __init__(self):
-        self.file = open('items.json','w')
-        
     def process_item(self,item,spider):
-        line = json.dumps(dict(item),ensure_ascii=False)
-        self.file.write(line.encode('utf8')+'\r\n')
+        d = dict(item)
+        chunks = []
+        for key,value in d.items():
+            if key != 'content':
+                chunks.append('%s:%s' % (key,value))
+                
+        line =  '\r\n'.join(chunks)
+            
+        f = open('data/%s' % item['title'],'w')
+        
+        f.write(line+'\r\n')
+        
+        f.write(item['content'])
+        
+        f.close()
         

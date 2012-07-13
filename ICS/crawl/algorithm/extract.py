@@ -27,6 +27,7 @@ def preProcess(html):
 	html = re.sub(r"(?s)\s*<script.*?>.*?</script>", '', html)
 	html = re.sub(r"(?s)\s*<style.*?>.*?</style>", '', html)
 	html = re.sub(r"&.{2,5};|&#.{2,5};", '', html)
+	html = re.sub(r"(?s)\s<img.*?>.*?</img>",'',html)
 
 	#段落处理(缩进)
 	lines = re.split(r'(?i)\s*<p(\s.*?)?>', html) #p pre
@@ -126,14 +127,27 @@ def getTitle(html):
 		return m.group(1)
 	return None
 
+def getCommentNbr(text):
+	patterns = (
+			r'(\d+)人参与',
+			r'(\d+)人评论',)
+	for p in patterns:
+		m = re.search(p,text)
+		if m:
+			return m.group(1)
+	return None
+
 def parseHtml(html, blocksWidth=3, threshold=100):
 	title = getTitle(html)
 	html = preProcess(html)
+	commentNbr = getCommentNbr(html)
 	datetime = getDateTime(html)
+	
 	text = getText(html, blocksWidth, threshold)
 	return {'title':title,
 			'datetime':datetime,
-			'text':text}
+			'text':text,
+			'commentNbr':commentNbr}
 
 def printDict(dic):
 	for key, value in dic.items():

@@ -20,7 +20,7 @@ class CrawlModel(models.Model):
     crawl_datetime      = models.DateTimeField(max_length=255,blank=True,null=True) #爬取日期
     field               = models.CharField(max_length=255,blank=True,null=True)  #领域
     model_type          = models.CharField(max_length=255,blank=True,null=True) #类型
-    uiid                = models.CharField(max_length=255,blank=True,null=True) #内容存放地址
+    uuid                = models.CharField(max_length=255,blank=True,null=True) #内容存放地址
     
     class Meta:
         verbose_name = "舆论数据"  

@@ -12,8 +12,9 @@ from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from crawl.items import CrawlItem
 import datetime
 import hashlib
+import chardet
 
-#from crawl.algorithm.extract import parseHtml
+from crawl.algorithm.extract import parseHtml
 
 class SinaSpider(CrawlSpider):
     
@@ -38,7 +39,7 @@ class SinaSpider(CrawlSpider):
                     #检查重复
 #        if self.checkDumplicated(url):
 #            return
-        self.parse_detail(self,response)
+        return  self.parse_detail(response)
         
     def parse_detail(self,response):
 #    url                 = models.CharField(max_length=255,blank=True,null=True) #网址
@@ -50,7 +51,7 @@ class SinaSpider(CrawlSpider):
 #    crawl_datetime      = models.DateTimeField(max_length=255,blank=True,null=True) #爬取日期
 #   *field               = models.CharField(max_length=255,blank=True,null=True)  #领域
 #    model_type          = models.CharField(max_length=255,blank=True,null=True) #类型
-#    uiid                = models.CharField(max_length=255,blank=True,null=True) #内容存放地址
+#    uuid                = models.CharField(max_length=255,blank=True,null=True) #内容存放地址
 
         url = response.url
         item = CrawlItem(url            =   url,
@@ -61,10 +62,20 @@ class SinaSpider(CrawlSpider):
                          model_type     =   self.model_type,
                          )
         
-                    #从unicode转换为 utf8
-#        html = response
+                    #数据
+        data = response.body
+     
+                    #转换到utf8编码
+        char = chardet.detect(data)
+        char = char['encoding']
+        html = unicode(data,char,'ignore').encode('utf-8')
         
-#        info = parseHtml(html)
+                    #解析
+        info = parseHtml(html)
+        item['publish_datetime'] = info['datetime']
+        item['title'] = info['title']
+        item['content'] = info['text']
+        item['commentNbr'] = info['commentNbr']
         
 #        hxs = HtmlXPathSelector(response)
 #        
