@@ -26,9 +26,3 @@ INSTALLED_APPS = (
 
 #page
 PAGE_SAVE_DIR = ''
-
-
-
-#redis
-REDIS_HOST = '127.0.0.1'
-REDIS_PORT = 6379
