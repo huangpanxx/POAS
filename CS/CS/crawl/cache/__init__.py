@@ -17,7 +17,10 @@ class EmptyCache(object):
 
     def deleteCache(self,dicName,url):
         pass
-
-_cacheTypeStr = settings['CACHE'] 
-_cacheType = load_object(_cacheTypeStr)
-cache = _cacheType()
+    
+_cacheTypeStr = settings.get('CACHE')
+if _cacheTypeStr:
+    _cacheType = load_object(_cacheTypeStr)
+    cache = _cacheType()
+else:
+    cache = EmptyCache()

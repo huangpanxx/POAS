@@ -22,7 +22,3 @@ DATABASES = {
 INSTALLED_APPS = (
      'common.model',
 )
-
-
-#page
-PAGE_SAVE_DIR = ''

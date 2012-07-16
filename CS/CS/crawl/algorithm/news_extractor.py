@@ -115,16 +115,24 @@ def getText(html, blocksWidth=2, threshold=150):
 
 	return text
 
+def datetimeprocessor1(text):
+	re.search()
+	pass
+
 def getDateTime(text):
 	patterns = ( 
-			'\d{4}-\d{2}-\d{2}(\s+\d{2}:\d{2})?',
-			r'\d{4}年\d{2}月\d{2}日(\s+\d{2}:\d{2})?',
-			r'\d{4}/\d{1,2}/\d{1,2}(\s+\d{2}:\d{2})?',
+			r'(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})(\s+\d{2}:\d{2})?' ,
+			r'(?P<year>\d{4})年(?P<month>\d{2})月(?P<day>\d{2})日(\s+\d{2}:\d{2})?'   ,
+			r'(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{1,2})(\s+\d{2}:\d{2})?',
 			)
 	for p in patterns:
 		m = re.search(p, text)
 		if m:
-			return m.group(0)
+			group = m.group
+			year = group('year')
+			month = group('month')
+			day = group('day')
+			return '%s-%s-%s' % (year,month,day)
 	return None
 
 def getTitle(html):
