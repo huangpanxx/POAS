@@ -30,6 +30,7 @@ pip-log.txt
 *.db
 
 #CS
-CS/CS/data/*
+CS/CS/data
+CS/CS/pages
 CS/CS/.scrapy
 

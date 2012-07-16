@@ -37,8 +37,12 @@ NEWSPIDER_MODULE = 'crawl.spiders'
 DEFAULT_ITEM_CLASS = 'crawl.items.CrawlItem'
 USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
 
-#ITEM_PIPELINES = ['crawl.pipelines.CrawlPipeline'] #数据库
-ITEM_PIPELINES = ['crawl.pipelines.JsonPipeline'] #json文件输出
+ITEM_PIPELINES = [
+                  'crawl.pipelines.CheckDumplicatedPipeline',
+                  'crawl.pipelines.DbPipeline',
+                  'crawl.pipelines.ContentSavePipeline',
+#                  'crawl.pipelines.PlainTextPipeline',
+                  ]
 
 
 SPIDER_MIDDLEWARES = {
@@ -51,6 +55,8 @@ SCHEDULER_DISK_QUEUE = 'scrapy.squeue.PickleFifoDiskQueue'
 SCHEDULER_MEMORY_QUEUE = 'scrapy.squeue.FifoMemoryQueue'
 
 CACHE = 'crawl.cache.cache.RedisCache' 
+
+PAGE_DIRECTORY = os.path.join(PROJECT_PATH, 'pages')
 
 #redis
 REDIS_HOST = '127.0.0.1'

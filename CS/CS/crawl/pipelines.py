@@ -6,34 +6,42 @@
 
 from crawl.model.models import CrawlModel
 from scrapy.exceptions import DropItem
+from scrapy.conf import settings
 
-class CrawlPipeline(object):
-    def __init__(self):
-        pass
+page_dir = settings['PAGE_DIRECTORY']
+
     
-    def dropIfDumplicated(self,item,spider): 
+class CheckDumplicatedPipeline(object):
+    def process_item(self,item,spider): 
         url = item['url']
         if CrawlModel.objects.filter(url=url).exists():
             raise DropItem()
- 
+        else:
+            return item
+
+class DbPipeline(object):
     def process_item(self, item, spider):
-        self.dropIfDumplicated(item,spider)
         item.save()
         return item
+    
+class ContentSavePipeline(object): 
+    def process_item(self,item,spider): 
+        uuid = item['uuid']
+        f = open(r'%s/%s' % (page_dir,uuid),'w')
+        f.write(item['content'])
+        f.close()
+   
+         
+         
+#def _default(obj):
+#    if isinstance(obj,datetime):
+#        return unicode(obj.strftime(u'%Y-%m-%dT%H:%M:%S'))
+#    elif isinstance(obj,date):
+#        return unicode(obj.strftime(u'%Y-%m-%d'))
+#    else:
+#        raise TypeError('%r is not JSON serializable' % obj)
 
-
-from datetime import date,datetime
-#import json
-
-def _default(obj):
-    if isinstance(obj,datetime):
-        return unicode(obj.strftime(u'%Y-%m-%dT%H:%M:%S'))
-    elif isinstance(obj,date):
-        return unicode(obj.strftime(u'%Y-%m-%d'))
-    else:
-        raise TypeError('%r is not JSON serializable' % obj)
- 
-class JsonPipeline(object): 
+class PlainTextPipeline(object): 
     def process_item(self,item,spider):
         if not item['title']:
             raise DropItem()
@@ -48,11 +56,9 @@ class JsonPipeline(object):
             
         uuid = item['uuid']
         
-        f = open(r'../data/%s' % uuid,'w')
-        
+        f = open(r'%s/%s' % (page_dir,uuid),'w')
         f.write(line+'\r\n')
-        
         f.write(item['content'])
-        
         f.close()
+        
         
