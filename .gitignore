@@ -26,8 +26,10 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-CS/CS/data/*
+#db 
+*.db
 
+#CS
+CS/CS/data/*
 CS/CS/.scrapy
 
-*.db

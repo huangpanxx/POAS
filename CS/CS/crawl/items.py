@@ -5,7 +5,7 @@
 
 from scrapy.item import Field 
 from scrapy.contrib_exp.djangoitem import DjangoItem
-from common.model.models import CrawlModel
+from crawl.model.models import CrawlModel
 
 
 

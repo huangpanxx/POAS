@@ -4,7 +4,7 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/topCrawl/item-pipeline.html
 
-from common.model.models import CrawlModel
+from crawl.model.models import CrawlModel
 from scrapy.exceptions import DropItem
 
 class CrawlPipeline(object):
@@ -48,7 +48,7 @@ class JsonPipeline(object):
             
         uuid = item['uuid']
         
-        f = open(r'data/%s' % uuid,'w')
+        f = open(r'../data/%s' % uuid,'w')
         
         f.write(line+'\r\n')
         

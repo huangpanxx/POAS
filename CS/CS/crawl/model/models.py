@@ -22,14 +22,3 @@ class CrawlModel(models.Model):
     model_type          = models.CharField(max_length=255,blank=True,null=True) #类型
     uuid                = models.CharField(max_length=255,blank=True,null=True) #内容存放地址
     
-    class Meta:
-        verbose_name = "舆论数据"  
-        verbose_name_plural = "舆论数据"
-        
-    def __unicode__(self):
-        return '%(title)s\t\t%(site)s%(publish_datetime)s' % {
-            'title':self.title,
-            'site':self.site,
-            'publish_datetime':unicode(self.publish_datetime)
-                        }
-    
