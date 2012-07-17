@@ -58,6 +58,10 @@ CACHE = 'crawl.cache.cache.RedisCache'
 
 PAGE_DIRECTORY = os.path.join(PROJECT_PATH, 'pages')
 
+WEBSERVICE_RESOURCES = {
+                        'crawl.resources.RpcResources.ItemResource' : 1
+                        }
+
 #redis
 REDIS_HOST = '127.0.0.1'
 REDIS_PORT = 6379

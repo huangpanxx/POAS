@@ -5,6 +5,7 @@ encoding//crawl/cache/__init__.py=utf8
 encoding//crawl/manage.py=utf8
 encoding//crawl/model/models.py=utf8
 encoding//crawl/pipelines.py=utf8
+encoding//crawl/resources/RpcResources.py=utf8
 encoding//crawl/run.py=utf8
 encoding//crawl/settings.py=utf8
 encoding//crawl/spidermiddlewares/redisfiltermiddleware.py=utf8
