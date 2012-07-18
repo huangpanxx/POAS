@@ -10,6 +10,11 @@ from scrapy.conf import settings
 
 page_dir = settings['PAGE_DIRECTORY']
 
+class ValidationPipeline(object):
+    def process_item(self,item,spider):
+        if not item['content']:
+            raise DropItem()
+        return item
     
 class CheckDumplicatedPipeline(object):
     def process_item(self,item,spider): 

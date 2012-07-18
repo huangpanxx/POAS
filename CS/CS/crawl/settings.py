@@ -38,6 +38,7 @@ DEFAULT_ITEM_CLASS = 'crawl.items.CrawlItem'
 USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
 
 ITEM_PIPELINES = [
+                  'crawl.pipelines.ValidationPipeline',
                   'crawl.pipelines.CheckDumplicatedPipeline',
                   'crawl.pipelines.DbPipeline',
                   'crawl.pipelines.ContentSavePipeline',
@@ -59,7 +60,7 @@ CACHE = 'crawl.cache.cache.RedisCache'
 PAGE_DIRECTORY = os.path.join(PROJECT_PATH, 'pages')
 
 WEBSERVICE_RESOURCES = {
-                        'crawl.resources.RpcResources.ItemResource' : 1
+                        'crawl.webservices.ItemResource.ItemResource' : 1
                         }
 
 #redis

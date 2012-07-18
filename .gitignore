@@ -29,8 +29,16 @@ pip-log.txt
 #db 
 *.db
 
+#tmp file
+*.swp
+
 #CS
-CS/CS/data
-CS/CS/pages
-CS/CS/.scrapy
+CS/CS/data/
+CS/CS/pages/
+CS/CS/.scrapy/
+CS/CS/dbs/
+CS/CS/setup.py
+CS/CS/project.egg-info/
+CS/CS/build/
+CS/CS/pages/
 
