@@ -55,12 +55,13 @@ DEPTH_LIMIT  = 1
 SCHEDULER_DISK_QUEUE = 'scrapy.squeue.PickleFifoDiskQueue'
 SCHEDULER_MEMORY_QUEUE = 'scrapy.squeue.FifoMemoryQueue'
 
-CACHE = 'crawl.cache.cache.RedisCache' 
+CACHE = 'crawl.cache.caches.RedisCache' 
 
 PAGE_DIRECTORY = os.path.join(PROJECT_PATH, 'pages')
 
 WEBSERVICE_RESOURCES = {
-                        'crawl.webservices.ItemResource.ItemResource' : 1
+                        'crawl.webservices.ItemResource.ItemResource'   : 1,
+                        'crawl.webservices.CacheResource.CacheResource' : 1,
                         }
 
 #redis

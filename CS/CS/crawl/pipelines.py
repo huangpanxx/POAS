@@ -12,7 +12,7 @@ page_dir = settings['PAGE_DIRECTORY']
 
 class ValidationPipeline(object):
     def process_item(self,item,spider):
-        if not item['content']:
+        if (not item['content']) or (not item['publish_datetime']) or (not item['title']):
             raise DropItem()
         return item
     
