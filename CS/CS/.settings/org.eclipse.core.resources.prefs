@@ -10,4 +10,4 @@ encoding//crawl/settings.py=utf8
 encoding//crawl/spidermiddlewares/redisfiltermiddleware.py=utf8
 encoding//crawl/spiders/SinaSpider.py=utf-8
 encoding//crawl/utils/charset.py=utf8
-encoding//crawl/webservices/ItemResource.py=utf8
+encoding//web/webservice.py=utf8
