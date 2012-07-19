@@ -7,49 +7,24 @@ Created on 2012-7-18
 
     
 from crawl.cache import cache
-from scrapyd.webservice import WsResource
 from scrapy.conf import settings
+from scrapy.webservice import JsonRpcResource
 
-class CacheResource(WsResource):
+class CacheResource(JsonRpcResource):
     ws_name = 'cache'
-    def render_GET(self,txrequest):
-        try:
-            op = txrequest.args['op'][0]
-            if op == 'clearKey':
-                key = txrequest.args['key'][0]
-                cache.clearKey(key)
-                return True
-            if op == 'keys':
-                pattern = txrequest.args['key'][0]
-                return cache.keys(pattern)
-            if op == 'deleteItem':
-                key = txrequest.args['key'][0]
-                url = txrequest.args['url'][0]
-                cache.deleteItem(key, url)
-                return True
-            if op == 'items':
-                key = txrequest.args['key'][0]
-                return cache.items(key)
-        except KeyError:
-            return {'error':'param is missing'}
-        except Exception:
-            return {'error':'unknown'}
+    def __init__(self, crawler):
+        JsonRpcResource.__init__(self, crawler, cache)
         
-class ItemResource(WsResource):
-    ws_name = 'item'
+class _PageLoader(object):
     page_dir = settings['PAGE_DIRECTORY']
-    def render_GET(self,txrequest):
-        try:
-            uuid = txrequest.args['uuid'][0]
-            path = r'%s/%s' % (self.page_dir,uuid) #攻击危险,检查uuid合法性（数字+字母)
-            f = open(path)
-            data = f.read()
-            return {'content' : data}
-        except KeyError:
-            return {'error':'param uuid is needed'}
-        except IOError:
-            return {'error':'file not exist'}
-        except Exception,e: #@UnusedVariable
-            return {'error':'unknow'}
+    def getPage(self,uuid):
+            path = r'%s/%s' % (self.page_dir, uuid) #攻击危险,检查uuid合法性（数字+字母)
+            return open(path).read()
+        
+_page_loader = _PageLoader()
+    
+class ItemResource(JsonRpcResource):
+    ws_name = 'item'
+    def __init__(self,crawler):
+        JsonRpcResource.__init__(self, crawler,_page_loader)
 
-            
