@@ -19,16 +19,24 @@ from scrapyd.config import Config
 from scrapy.utils.misc import load_object
 
 def configRoot(root,config):
-    config = Config()
-    _services = config.get('services', {})
+	config = Config()
+	_services = config.get('services', '{}') 
+	try:
+		services = eval(_services)
+	except Exception,e:
+		print 'services config is wrong:%s' % (e,)
+		exit(1)
 
-    #services = eval(_services)
-    #for key,value in services.items():
-        #service = load_object(value)
-    #    root.putChild(key, service(root))
-        
-    root.update_projects()
-    return root
+	for key,value in services.items():
+		try:
+			service = load_object(value)
+			root.putChild(key, service(root))
+		except Exception,e:
+			print 'load %s error:%s' % (value,e)
+			exit(1)
+
+	root.update_projects()
+	return root
 
 def application(config):
     app = Application("Scrapyd")

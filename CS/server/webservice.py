@@ -5,7 +5,10 @@ Created on 2012-7-18
 @author: snail
 '''
 
-    
+import sys
+sys.path.append('../crawl/')
+
+   
 from crawl.cache import cache
 from scrapy.conf import settings
 from scrapy.webservice import JsonRpcResource
