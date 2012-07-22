@@ -33,12 +33,12 @@ pip-log.txt
 *.swp
 
 #CS
-CS/CS/data/
-CS/CS/pages/
-CS/CS/.scrapy/
-CS/CS/dbs/
-CS/CS/setup.py
-CS/CS/project.egg-info/
-CS/CS/build/
-CS/CS/pages/
+CS/data/
+CS/pages/
+CS/.scrapy/
+CS/dbs/
+CS/setup.py
+CS/project.egg-info/
+CS/build/
+CS/pages/
 

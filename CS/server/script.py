@@ -12,9 +12,10 @@ from twisted.application import app
 from scrapyd import get_application
 from scrapyd.config import Config
 
+from scrapy.utils.project import project_data_dir
 
 def _get_config(config_file):
-    datadir = os.path.join(os.curdir, '.scrapy', 'scrapyd')
+    datadir = os.path.join(project_data_dir(), '.scrapy', 'scrapyd')
     conf = {
         'eggs_dir': os.path.join(datadir, 'eggs'),
         'logs_dir': os.path.join(datadir, 'logs'),
@@ -30,7 +31,7 @@ eggs_dir = %(eggs_dir)s
 logs_dir = %(logs_dir)s
 dbs_dir  = %(dbs_dir)s
     """ % conf
-    conf_list = [StringIO(scrapyd_conf),StringIO(open('server.conf').read())]
+    conf_list = [StringIO(scrapyd_conf),StringIO(open(config_file).read())]
     return Config(extra_sources=conf_list)
 
 def execute(config_file):

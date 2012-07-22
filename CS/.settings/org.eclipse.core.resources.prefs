@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//crawler/__init__.py=utf8
 encoding//crawler/algorithm/news_extractor.py=utf8
 encoding//crawler/cache/__init__.py=utf8
+encoding//crawler/items.py=utf8
 encoding//crawler/model/models.py=utf8
 encoding//crawler/pipelines.py=utf8
 encoding//crawler/settings.py=utf8

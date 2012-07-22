@@ -10,7 +10,7 @@
 import os
 
 #db settings
-PROJECT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),'../')
+PROJECT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),'../.scrapy')
 
 DATABASES = {
     'default': {
@@ -34,7 +34,7 @@ BOT_VERSION = '1.0'
 
 SPIDER_MODULES = ['crawler.spiders']
 NEWSPIDER_MODULE = 'crawler.spiders'
-DEFAULT_ITEM_CLASS = 'crawler.items.crawlerItem'
+DEFAULT_ITEM_CLASS = 'crawler.items.CrawlItem'
 USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
 
 ITEM_PIPELINES = [
@@ -42,7 +42,7 @@ ITEM_PIPELINES = [
                   'crawler.pipelines.CheckDumplicatedPipeline',
                   'crawler.pipelines.DbPipeline',
                   'crawler.pipelines.ContentSavePipeline',
-#                  'crawler.pipelines.PlainTextPipeline',
+                  #'crawler.pipelines.PlainTextPipeline',
                   ]
 
 
