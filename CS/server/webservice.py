@@ -6,10 +6,10 @@ Created on 2012-7-18
 '''
 
 import sys
-sys.path.append('../crawl/')
+sys.path.append('../')
 
    
-from crawl.cache import cache
+from crawler.cache import cache #@UnresolvedImport
 from scrapy.conf import settings
 from scrapy.webservice import JsonRpcResource
 

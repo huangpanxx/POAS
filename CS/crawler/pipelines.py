@@ -2,11 +2,12 @@
 # Define your item pipelines here
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: http://doc.scrapy.org/topCrawl/item-pipeline.html
+# See: http://doc.scrapy.org/topcrawler/item-pipeline.html
 
-from crawl.model.models import CrawlModel
+from .model.models import CrawlModel
 from scrapy.exceptions import DropItem
 from scrapy.conf import settings
+import os
 
 page_dir = settings['PAGE_DIRECTORY']
 
@@ -30,6 +31,10 @@ class DbPipeline(object):
         return item
     
 class ContentSavePipeline(object): 
+    def __init__(self):
+        if not os.path.exists(page_dir):
+            os.mkdir(page_dir)
+            
     def process_item(self,item,spider): 
         uuid = item['uuid']
         f = open(r'%s/%s' % (page_dir,uuid),'w')

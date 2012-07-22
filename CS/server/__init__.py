@@ -1,2 +1,5 @@
-import sys
-sys.path.append('../crawl/')
+'''
+Created on 2012-7-22
+
+@author: snail
+'''

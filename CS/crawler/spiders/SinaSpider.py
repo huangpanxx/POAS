@@ -8,12 +8,12 @@ Created on 2012-7-3
 
 from scrapy.contrib.spiders.crawl import Rule, CrawlSpider
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
-from crawl.items import CrawlItem
-from crawl.algorithm.news_extractor import parseHtml
+from crawler.items import CrawlItem 
+from crawler.algorithm.news_extractor import parseHtml
 import datetime
 import hashlib
 
-from crawl.utils.charset import decodeHtml
+from crawler.utils.charset import decodeHtml
 
 
 class SinaSpider(CrawlSpider):
