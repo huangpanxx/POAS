@@ -21,10 +21,11 @@ from scrapy.utils.misc import load_object
 def configRoot(root,config):
     config = Config()
     _services = config.get('services', {})
-    services = eval(_services)
-    for key,value in services.items():
-        service = load_object(value)
-        root.putChild(key, service(root))
+
+    #services = eval(_services)
+    #for key,value in services.items():
+        #service = load_object(value)
+    #    root.putChild(key, service(root))
         
     root.update_projects()
     return root
