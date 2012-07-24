@@ -1,7 +1,10 @@
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -27,10 +30,12 @@ public class main {
 
 		ArrayList<Document> doc = new ArrayList<Document>();
 		HashSet<Lexical> word = new HashSet<Lexical>();
+		ArrayList<String> stop_word = new ArrayList<String>();
 		float a = (float) 0.8,b = (float) 0.2;
 		
-		//get data from files,arraylist<Document>,set<Lexical>
-		input(doc,word);
+		//get data from files,arraylist<Document>,set<Lexical> and stop_word
+		input_stop(stop_word);
+		input(doc,word,stop_word);
 
 		//compute the weight
 		compute(doc,word,a,b);
@@ -44,6 +49,14 @@ public class main {
 		Connection conn = connect_db();
 		write_back(conn,doc,word);
 		conn.close();
+	}
+
+	private static void input_stop(ArrayList<String> stop_word) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("src/stop.txt")));
+		String line;
+		while ((line = br.readLine()) != null)
+			stop_word.add(line.toString());
 	}
 
 	static Connection connect_db()
@@ -70,7 +83,7 @@ public class main {
     	return conn;
     }
 	
-	static void input(ArrayList<Document> doc,HashSet<Lexical> word) throws IOException
+	static void input(ArrayList<Document> doc,HashSet<Lexical> word, ArrayList<String> stop_word) throws IOException
 	{
 		File file = new File("src/test/");
 		File[] file_list = file.listFiles();
@@ -88,6 +101,12 @@ public class main {
 		    		 String tmp = str.nextToken();
 		    		 String delims = "/";
 		    		 String[] tokens = tmp.split(delims);
+		    		 
+		    		 //don't use the words in the stop words;
+		    		 if (in_stop(tokens[0],stop_word))
+		    			 continue;
+		    		 
+		    		 //don't use the words which part_of_speech are p,w,c,u.
 		    		 if (tokens[1].indexOf('w') == -1&&tokens[1].indexOf('p') == -1&&
 		    				 tokens[1].indexOf('c') == -1&&tokens[1].indexOf('u') == -1)
 		    		 {
@@ -127,6 +146,14 @@ public class main {
 		     doc.add(doc_tmp);
 		     fin.close();  
 		}
+	}
+
+	private static boolean in_stop(String string, ArrayList<String> stop_word) {
+		// TODO Auto-generated method stub
+		for (String tmp:stop_word)
+			if (tmp.equals(string))
+				return true;
+		return false;
 	}
 
 	static void compute(ArrayList<Document> doc,HashSet<Lexical> word,float a,float b)
