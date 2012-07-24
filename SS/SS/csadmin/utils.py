@@ -18,11 +18,9 @@ command).
 
 import urllib
 from urlparse import urljoin
-
 from scrapy.utils.jsonrpc import jsonrpc_client_call
-from scrapy.utils.py26 import json
-
 from .models import settings
+import json
 
 def get_wsurl_server(path):
     host = settings.server_address

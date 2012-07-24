@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+		<link rel="stylesheet" href="/static/css/reset.css" type="text/css" media="screen" title="no title" />
+		<link rel="stylesheet" href="/static/css/text.css" type="text/css" media="screen" title="no title" />
+		<link rel="stylesheet" href="/static/css/form.css" type="text/css" media="screen" title="no title" />
+		<link rel="stylesheet" href="/static/css/buttons.css" type="text/css" media="screen" title="no title" />
+		<link rel="stylesheet" href="/static/css/grid.css" type="text/css" media="screen" title="no title" />	
+		<link rel="stylesheet" href="/static/css/layout.css" type="text/css" media="screen" title="no title" />	
+		<link rel="stylesheet" href="/static/css/ui-darkness/jquery-ui-1.8.12.custom.css" type="text/css" media="screen" title="no title" />
+		<link rel="stylesheet" href="/static/css/plugin/jquery.visualize.css" type="text/css" media="screen" title="no title" />
+		<link rel="stylesheet" href="/static/css/plugin/facebox.css" type="text/css" media="screen" title="no title" />
+		<link rel="stylesheet" href="/static/css/plugin/uniform.default.css" type="text/css" media="screen" title="no title" />
+		<link rel="stylesheet" href="/static/css/plugin/dataTables.css" type="text/css" media="screen" title="no title" />
+		<link rel="stylesheet" href="/static/css/custom.css" type="text/css" media="screen" title="no title">
+		{% block head %}
+		{% endblock %}
+	</head>
+
+	<body>
+		<div id="wrapper">
+			{% block content %}
+			{% endblock %}
+		</div>
+
+
+
+		<div id="footer">
+			<div class="content_pad">
+				{% include "footer.html" %}
+			</div>
+		</div>
+
+
+		<script src="/static/js/jquery/jquery-1.5.2.min.js"></script>
+		<script src="/static/js/jquery/jquery-ui-1.8.12.custom.min.js"></script>
+		<script src="/static/js/misc/excanvas.min.js"></script>
+		<script src="/static/js/jquery/facebox.js"></script>
+		<script src="/static/js/jquery/jquery.visualize.js"></script>
+		<script src="/static/js/jquery/jquery.dataTables.min.js"></script>
+		<script src="/static/js/jquery/jquery.tablesorter.min.js"></script>
+		<script src="/static/js/jquery/jquery.uniform.min.js"></script>
+		<script src="/static/js/jquery/jquery.placeholder.min.js"></script>
+
+		<script src="/static/js/widgets.js"></script>
+		<script src="/static/js/dashboard.js"></script>
+
+		<script type="text/javascript"> $(document).ready ( function () { Dashboard.init ();}); </script>
+
+	</body>
+</html>
