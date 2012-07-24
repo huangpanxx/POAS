@@ -3,8 +3,6 @@ import csadmin
 import topic
 import personal
 
-#from django.contrib import admin
-
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
