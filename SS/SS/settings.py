@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'SS.csadmin'
     'SS.topic'
+    'SS.personal'
 )
 
 # A sample logging configuration. The only tangible logging

@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 import csadmin
 import topic
+import personal
 
 #from django.contrib import admin
 
@@ -20,6 +21,7 @@ urlpatterns = patterns('',
     
 #     url(r'^admin/user/', include(admin.site.urls)),
     url(r'^admin/cs/',include(csadmin.urls)),
-    url(r'^topic/',include(topic.urls))
+    url(r'^topic/',include(topic.urls)),
+    url(r'^personal/',include(personal.urls))
     
 )
