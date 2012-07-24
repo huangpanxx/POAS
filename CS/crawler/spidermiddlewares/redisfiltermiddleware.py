@@ -1,6 +1,6 @@
 #coding:utf8
 from scrapy.http import Request
-from crawl.cache import cache
+from crawler.cache import cache
 from scrapy.exceptions import DropItem
 
 class RedisFilterMiddleware(object):

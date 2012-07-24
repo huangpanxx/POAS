@@ -2,7 +2,7 @@
 
 import urllib2
 import re
-from crawl.utils.charset import decodeHtml
+from crawler.utils.charset import decodeHtml
 
 
 

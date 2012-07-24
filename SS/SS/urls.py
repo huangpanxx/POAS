@@ -1,5 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
-import CSAdmin
+import csadmin
+
+#from django.contrib import admin
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -14,6 +16,7 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
-    url(r'^CSAdmin/',include(CSAdmin.urls)),
+    
+#     url(r'^admin/user/', include(admin.site.urls)),
+    url(r'^admin/cs/',include(csadmin.urls)),
 )

@@ -2,7 +2,7 @@
 #coding:utf8
 from django.core.management import execute_manager
 try:
-    import settings
+    from crawler import settings
 except ImportError:
     import sys
     error = '''加载Django配置文件失败'''
