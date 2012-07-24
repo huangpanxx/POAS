@@ -4,14 +4,12 @@ public class Document
 	private int pk;                                           //the primary key of this document
 	private int length;                                       //the length of this document
 	private int size;                                         //the lexical number of document
-	private String head;                                      //head of the document
 	private String s_url;                                     //the url of this document
 	private String field;                                     //the type of document like news,weibo,blog......
 	
-	Document(int pk_in,String head_in,String field_in)
+	Document(int pk_in,String field_in)
 	{
 		pk = pk_in;
-		head = head_in;
 		field = field_in;
 	}
 	
@@ -40,9 +38,9 @@ public class Document
 		return size;
 	}
 	
-	public String get_head()
+	public void set_url(String url_in)
 	{
-		return head;
+		s_url = url_in;
 	}
 	
 	public String get_url()
@@ -53,5 +51,17 @@ public class Document
 	public String get_field()
 	{
 		return field;
+	}
+	
+	public void print()
+	{
+		System.out.print(pk);
+		System.out.print("\t");
+		System.out.print(length);
+		System.out.print("\t");
+		System.out.print(size);
+		System.out.print("\t");
+		System.out.print(field);
+		System.out.print("\n");
 	}
 }

@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Map;
 
 public class Lexical 
@@ -5,9 +6,9 @@ public class Lexical
 	private String value;                                  //word's value
 	private int length;                                    //the length of the word
 	private String part_of_speech;
-	private Map<Integer, Integer> m_times;                 //how many times shown in specific document
-	private Map<Integer,Integer> m_pos;                    //position that the word first shown in specific document
-	private Map<Integer,Float> m_weight;                   //word's weight in specfic document
+	private Map<Integer, Integer> m_times = new HashMap<Integer,Integer>();                 //how many times shown in specific document
+	private Map<Integer,Integer> m_pos = new HashMap<Integer,Integer>();                   //position that the word first shown in specific document
+	private Map<Integer,Float> m_weight = new HashMap<Integer,Float>();                   //word's weight in specfic document
 	
 	public Lexical(String name,String part)
 	{
@@ -23,21 +24,19 @@ public class Lexical
 	
 	public void add_times(int pk)
 	{
-		if (m_times.containsKey(pk))
+		if (m_times != null&&m_times.containsKey(pk))
 		{
 			int tmp = m_times.get(pk);
 			tmp++;
 			m_times.put(pk, tmp);
 		}
 		else
-		{
-			m_times.put(pk, 0);
-		}
+			m_times.put(pk, 1);
 	}
 	
 	public int get_times(int pk)
 	{
-		if (m_pos.containsKey(pk))
+		if (m_pos != null&&m_pos.containsKey(pk))
 			return m_times.get(pk);
 		else
 			return -1;
@@ -55,7 +54,7 @@ public class Lexical
 	
 	public int get_pos(int pk)
 	{
-		if (m_pos.containsKey(pk))
+		if (m_pos != null&&m_pos.containsKey(pk))
 			return m_pos.get(pk);
 		else
 			return -1;
@@ -78,13 +77,62 @@ public class Lexical
 		return sum / max;
 	}
 	
-	public String get_part()
+	public float get_part()
 	{
-		return part_of_speech;
+		if (part_of_speech.indexOf('n') != -1)
+			return 2;
+		else if (part_of_speech.indexOf('v') != -1)
+			return (float) 1.5;
+		else
+			return 1;
 	}
 	
 	public int show_times()
 	{
 		return m_pos.size();
+	}
+	
+	public Map<Integer,Integer> get_map()
+	{
+		return m_times;
+	}
+	
+	public int hashcode()
+	{
+		return value.hashCode();
+	}
+	
+	public Boolean equals(Lexical tmp)
+	{
+		if (tmp.value().equals(this.value))
+			return true;
+		return false;
+	}
+	
+	public void print()
+	{
+		System.out.print(value);
+		System.out.print(" ");
+		System.out.print(length);
+		System.out.print(" ");
+		System.out.print(part_of_speech);
+		System.out.print("\n");
+		for (int tmp:m_times.keySet())
+		{
+			System.out.print(tmp);
+			System.out.print(" ");
+			System.out.print(m_times.get(tmp));
+			System.out.print(" ");
+			System.out.print(m_pos.get(tmp));
+			System.out.print(" ");
+			System.out.print(m_weight.get(tmp));
+			System.out.print("\t");
+		}
+		System.out.println();
+	}
+
+	public String part() 
+	{
+		return part_of_speech;
 	}
 }
