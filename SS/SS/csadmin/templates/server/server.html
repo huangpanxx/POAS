@@ -1,0 +1,17 @@
+{% extends "grid_base.html" %}
+{% block tag_name %}
+"nav_server"
+{% endblock %}
+{% block grid_title %}
+Crawl Server Information
+{% endblock %}
+{% block grid_content %}
+<div class="x8">
+	<h2> Server Information </h2>
+	{% include "server/server_info_table.html" %}	
+</div>
+<div class="x4">
+	<h2>Available Projects</h2>
+	{% include "project/project_list.html" %}
+</div>
+{% endblock %}

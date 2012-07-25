@@ -1,0 +1,11 @@
+{% if projects %}
+<ol>
+	{% if projects.status == "ok" %}
+	{% for project in projects.projects %}
+	<li><a href="/admin/cs/project/{{ project }}">{{ project }}</a></li>
+	{% endfor %}
+	{% else %}
+	<h3>Errors:{{ projects.message }}</h3>
+	{% endif %}
+</ol>
+{% endif %}

@@ -1,0 +1,21 @@
+{% if versions %}
+<h2>Versions</h2>
+{% if versions.status == 'ok' %}
+<table class="data display datatable">
+	<thead>
+		<tr>
+			<th>Version Name</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for version in versions.versions %}
+		<tr>
+			<td> {{ version }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% else %}
+<h2>Error:{{ versions.message }}</h2>
+{% endif %}
+{% endif %}

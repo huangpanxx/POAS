@@ -22,6 +22,18 @@ from scrapy.utils.jsonrpc import jsonrpc_client_call
 from .models import settings
 import json
 
+def json_get(url,**kwargs):
+    exp = urllib.urlencode(kwargs)
+    if exp:
+        url = '%s?%s' % (url,exp)
+    data = urllib.urlopen(url).read()
+    return json.loads(data)
+
+def json_post(url,**kwargs):
+    exp = urllib.urlencode(kwargs)
+    data =urllib.urlopen(url, exp).read()
+    return json.loads(data)
+
 def get_wsurl_server(path):
     host = settings.server_address
     port = settings.server_port
@@ -31,9 +43,13 @@ def jsonrpc_call_server(path, method, *args, **kwargs):
     url = get_wsurl_server(path)
     return jsonrpc_client_call(url, method, *args, **kwargs)
 
-def json_get_server(path):
+def json_get_server(path,**kwargs):
     url = get_wsurl_server(path)
-    return json.loads(urllib.urlopen(url).read())
+    return json_get(url,**kwargs)
+
+def json_post_server(path,**kwargs):
+    url = get_wsurl_server(path)
+    return json_post(url,**kwargs)
 
 
 def get_wsurl_spider(path):
@@ -45,6 +61,10 @@ def jsonrpc_call_spider(path, method, *args, **kwargs):
     url = get_wsurl_spider(path)
     return jsonrpc_client_call(url, method, *args, **kwargs)
 
-def json_get_spider(path):
+def json_get_spider(path,**kwargs):
     url = get_wsurl_spider(path)
-    return json.loads(urllib.urlopen(url).read())
+    return json_get(url,**kwargs)
+
+def json_post_spider(path,**kwargs):
+    url = get_wsurl_spider(path)
+    return json_post(url,**kwargs)

@@ -1,0 +1,21 @@
+{% if spiders %}
+<h2>Spiders</h2>
+{% if spiders.status == 'ok' %}
+<table class="data display datatable">
+	<thead>
+		<tr>
+			<th>Spider Name</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for spider in spiders.spiders %}
+		<tr>
+			<td> {{ spider }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% else %}
+<h2>Error:{{ spiders.message }}</h2>
+{% endif %}
+{% endif %}

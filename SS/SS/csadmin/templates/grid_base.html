@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="header">
+	{% include "cs_admin_header.html" %}
+	{% comment %}
+	前边加载导航，后边加载脚本设置当前导航标签
+	{% endcomment %}
+	<script>
+		document.getElementById(
+		{% block tag_name %}
+		"Not Defined"
+		{% endblock %}
+		).className = "nav_current nav_icon";
+	</script>
+</div>
+<div id="content" class="xgrid">
+	<div id="masthead" >
+		<div class="content_pad">
+			<h1 class="no_breadcrumbs">
+				{% block grid_title %}
+				Not Defined
+				{% endblock %}
+			</h1>
+		</div>
+	</div>
+	{% block grid_content %}
+	Not Defined
+	{% endblock %}
+</div>
+
+{% endblock %}

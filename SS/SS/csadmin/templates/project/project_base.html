@@ -1,0 +1,48 @@
+﻿{% extends "grid_base.html" %}
+
+{% block tag_name %}
+"nav_project"
+{% endblock %}
+
+
+{% block grid_title %}
+{% if project_name %}
+Project  - {{ project_name }}
+{% include "project/project_navigate.html" %}
+
+{% comment %}
+前边加载导航，后边加载脚本设置当前导航标签
+{% endcomment %}
+<script>
+	document.getElementById(
+	{% block project_navigate_tag %}
+	"Not Defined"
+	{% endblock %}
+	).className = "current_page";
+</script>
+
+{% else %}
+Project
+{% endif %}
+{% endblock %}
+
+{% block grid_content %}
+
+{% if project_name %}
+
+<div class="x8">
+	{% block project_info %}
+	{% endblock %}
+</div>
+<div class="x4">
+	<h2>Available Projects</h2>
+	{% include "project/project_list.html" %}
+</div>
+
+{% else %}
+<div> 
+	<h2>Select a project</h2> 
+	{% include "project/project_list.html" %}
+</div>
+{% endif %}
+{% endblock %}
