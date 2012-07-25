@@ -1,0 +1,18 @@
+{% if settings %}
+<table class="data display">
+	<tbody>
+		<tr>
+			<td><b>Address</b></td>
+			<td>{{ settings.server_address }}</td>
+		</tr>
+		<tr>
+			<td><b>Server Port</b></td>
+			<td>{{ settings.server_port }}</td>
+		</tr>
+		<tr>
+			<td><b>Spider Port</b></td>
+			<td>{{ settings.spider_port }}</td>
+		</tr>
+	</tbody>
+</table>
+{% endif %}

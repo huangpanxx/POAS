@@ -1,0 +1,7 @@
+{% if projects %}
+<ol>
+	{% for project in projects %}
+	<li><a href="/admin/cs/project/{{ project }}">{{ project }}</a></li>
+	{% endfor %}
+</ol>
+{% endif %}

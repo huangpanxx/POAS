@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="header">
+	{% include "cs_admin_header.html" %}
+	<script>
+		document.getElementById("nav_server").className = "nav_current nav_icon";
+	</script>
+</div>
+
+<div id="content" class="xgrid">
+	<div id="masthead">
+		<h1 class="no_breadcrumbs">Projecr Information</h1>
+	</div>
+	<div id="content" class="xgrid">
+		<div class="x6">
+			<h2> Project Information </h2>
+		</div>
+		<div class="x6">
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -9,16 +9,16 @@ class CSAdminSettings(models.Model):
     
     def __init__(self):
         super(CSAdminSettings, self).__init__()
-
+        
 
 is_exist = False
 
 try:
-    is_exist = CSAdminSettings.objects.count() > 0
+    is_exist = len(CSAdminSettings.objects.filter('...')) > 0
 except:
     is_exist = False
     
 if is_exist:
-    settings = CSAdminSettings.objects.get()[0]
+    settings = CSAdminSettings.objects.all()[0]
 else:
     settings = CSAdminSettings()

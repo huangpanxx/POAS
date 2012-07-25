@@ -42,9 +42,9 @@ def get_wsurl_spider(path):
     return urljoin("http://%s:%s/"% (host, port), path)
 
 def jsonrpc_call_spider(path, method, *args, **kwargs):
-    url = get_wsurl_server(path)
+    url = get_wsurl_spider(path)
     return jsonrpc_client_call(url, method, *args, **kwargs)
 
 def json_get_spider(path):
-    url = get_wsurl_server(path)
+    url = get_wsurl_spider(path)
     return json.loads(urllib.urlopen(url).read())
