@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 import csadmin
-import topic
+import hot
 import personal
 
 # Uncomment the next two lines to enable the admin:
