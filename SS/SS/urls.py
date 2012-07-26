@@ -20,7 +20,8 @@ urlpatterns = patterns('',
     url(r'^admin/super/', include(admin.site.urls)),
     url(r'^admin/$',include(admin.site.urls)),
     url(r'^admin/cs/',include(csadmin.urls)),
-    url(r'^topic/',include(topic.urls)),
-    url(r'^personal/',include(personal.urls))
+    url(r'^hot/',include(hot.urls)),
+    url(r'^personal/',include(personal.urls)),
+    url(r'^grappelli/',include('grappelli.urls')),
     
 )
