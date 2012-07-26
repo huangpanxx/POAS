@@ -40,8 +40,8 @@ USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
 ITEM_PIPELINES = [
                   'crawler.pipelines.ValidationPipeline',
                   'crawler.pipelines.CheckDumplicatedPipeline',
-                  'crawler.pipelines.DbPipeline',
                   'crawler.pipelines.ContentSavePipeline',
+                  'crawler.pipelines.DbPipeline',
                   #'crawler.pipelines.PlainTextPipeline',
                   ]
 
@@ -51,7 +51,7 @@ SPIDER_MIDDLEWARES = {
         }
 
 DEPTH_PRIORITY = 1
-DEPTH_LIMIT  = 1
+DEPTH_LIMIT  = 2
 SCHEDULER_DISK_QUEUE = 'scrapy.squeue.PickleFifoDiskQueue'
 SCHEDULER_MEMORY_QUEUE = 'scrapy.squeue.FifoMemoryQueue'
 

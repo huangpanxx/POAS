@@ -8,8 +8,10 @@ Created on 2012-7-3
 
 from scrapy.contrib.spiders.crawl import Rule, CrawlSpider
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
+
 from crawler.items import CrawlItem 
 from crawler.algorithm.news_extractor import parseHtml
+
 import datetime
 import hashlib
 
@@ -19,16 +21,16 @@ from crawler.utils.charset import decodeHtml
 class SinaSpider(CrawlSpider):
     
     #settings for model
-    site_name = '新浪'
-    name = 'sina'
-    domain = 'news.sina.com.cn'
-    model_type = '新闻'
+    site_name = '新浪' 
+    name = 'sina' 
+    domain = 'news.sina.com.cn' 
+    model_type = '新闻' 
     
     #settings for crawlspider
-    allowed_domains = [domain]
-    start_urls = ['http://news.sina.com.cn']
+    allowed_domains = [domain] 
+    start_urls = ['http://news.sina.com.cn'] 
     
-    rules = (
+    rules = ( 
              Rule(SgmlLinkExtractor(allow=(r'http://news.sina.com.cn/.*?'),deny=('.*html'))),
              
              Rule(SgmlLinkExtractor(allow=(r'http://news.sina.com.cn/.*?/.*?html'),
@@ -57,7 +59,7 @@ class SinaSpider(CrawlSpider):
         html = decodeHtml(data)
         
         #解析
-        info = parseHtml(html)
+        info = parseHtml(html) 
         item['publish_datetime'] = info['datetime']
         item['title'] = info['title']
         item['content'] = info['text']

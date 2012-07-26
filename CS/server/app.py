@@ -27,6 +27,7 @@ def configRoot(root, config):
 
 	for key, value in services.items():
 		try:
+			print value
 			service = load_object(value)
 			root.putChild(key, service(root))
 			log.msg('load service:%s' % value)

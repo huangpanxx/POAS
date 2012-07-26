@@ -5,7 +5,6 @@ Created on 2012-7-18
 @author: snail
 '''
 
-
 from crawler.cache import cache #@UnresolvedImport
 from scrapy.conf import settings
 from scrapy.webservice import JsonRpcResource
@@ -27,4 +26,22 @@ class ItemResource(JsonRpcResource):
     ws_name = 'item'
     def __init__(self, crawler):
         JsonRpcResource.__init__(self, crawler, self._page_loader)
+        
+import sys
+class SystemResource(JsonRpcResource):
+    ws_name = 'system'
+    def __init__(self, crawler):
+        JsonRpcResource.__init__(self, crawler, sys)
 
+import os 
+class OSResource(JsonRpcResource):
+    ws_name = 'os'
+    def __init__(self, crawler):
+        JsonRpcResource.__init__(self, os)
+        
+from script import config
+class ConfigResource(JsonRpcResource):
+    ws_name = 'config'
+    def __init__(self,crawler):
+        JsonRpcResource.__init__(self, config)
+        

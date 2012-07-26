@@ -40,14 +40,25 @@ class ContentSavePipeline(object):
             
     def save_to(self, path, content):
         open(path, 'w').write(content)
+        
+    def make_dir(self,item):
+        site = item['site']
+        model_type = item['model_type']
+        field = item['field']
+        crawl_datetime = item['crawl_datetime']
+        save_dir = '%s/%s/%s/%s/%s' % (self.page_dir,crawl_datetime,site,model_type,field)
+        return save_dir
               
     def process_item(self, item, spider): 
-        uuid = item['uuid']
-        save_dir = '%s/%s' % (self.page_dir, spider.name)
+        
+        save_dir = self.make_dir(item)
         self.make_if_missing(save_dir)
+        
+        uuid = item['uuid']
         save_path = '%s/%s' % (save_dir, uuid)
+        
         self.save_to(save_path, item['content'])
-
+        item['save_path'] = save_path
          
          
 #def _default(obj):
@@ -61,7 +72,7 @@ class ContentSavePipeline(object):
 class PlainTextPipeline(object): 
     def process_item(self, item, spider):
         if not item['title']:
-            raise DropItem()
+            raise DropItem() 
         
         d = dict(item)
         chunks = []

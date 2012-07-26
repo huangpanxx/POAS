@@ -2,6 +2,7 @@
 
 import sys
 import os
+
 from cStringIO import StringIO
 
 from twisted.python import log
@@ -31,10 +32,13 @@ eggs_dir = %(eggs_dir)s
 logs_dir = %(logs_dir)s
 dbs_dir  = %(dbs_dir)s
     """ % conf
-    conf_list = [StringIO(scrapyd_conf),StringIO(open(config_file).read())]
+    conf_list = [StringIO(scrapyd_conf), StringIO(open(config_file).read())]
     return Config(extra_sources=conf_list)
 
+config = Config()
+
 def execute(config_file):
+    global config
     config = _get_config(config_file)
     log.startLogging(sys.stderr)
     application = get_application(config)
