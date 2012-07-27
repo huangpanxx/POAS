@@ -4,7 +4,7 @@ body { background: #222; font: 12px/1.7em arial, sans-serif; margin: 75px; }
 
 #login h1
 {
-	background: url(http://madebyamp.com/themes/dashboard/images/logo.png) no-repeat 0 0;
+	background: url(../images/logo.png) no-repeat 0 0;
 	width: 240px;
 	height: 32px;
 	line-height: 800px;

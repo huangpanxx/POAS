@@ -83,14 +83,24 @@ public class main {
     	return conn;
     }
 	
-	static void input(ArrayList<Document> doc,HashSet<Lexical> word, ArrayList<String> stop_word) throws IOException
+	static void input(ArrayList<Document> doc,HashSet<Lexical> word, ArrayList<String> stop_word) throws IOException, SQLException
 	{
 		File file = new File("src/test/");
 		File[] file_list = file.listFiles();
+		int doc_has = 0;    //there are how many doc in the db
+		 
+		Connection conn = connect_db();
+		Statement statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery("show table status from hot like 'hot_doc'");
+		while (rs.next())
+			doc_has = rs.getInt("Rows");
+		conn.close();
+		
 		for (int i = 1;i <= file_list.length;i++)
 		{
 			 BufferedReader fin = new BufferedReader(new FileReader(file_list[i - 1]));  
-			 Document doc_tmp = new Document(i,"news");
+			 
+			 Document doc_tmp = new Document(i + doc_has,"news");
 		     String line = fin.readLine();
 		     int file_length = 0,file_size = 0;
 		     while(line != null)
