@@ -4,9 +4,9 @@
 # See documentation in:
 # http://doc.scrapy.org/topcrawler/items.html
 
-from scrapy.item import Field , Item #@UnusedImport
 from scrapy.contrib_exp.djangoitem import DjangoItem
-from .model.models import CrawlModel
+from .model.models import Item
+from crawler.model.models import Field
 
 
 #class CrawlItem(Item):
@@ -26,5 +26,5 @@ class CrawlItem(DjangoItem):
     '''
     wrapper for scrapy model
     '''
-    django_model = CrawlModel
+    django_model = Item
     content      = Field()

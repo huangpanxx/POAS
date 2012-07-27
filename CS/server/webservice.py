@@ -21,9 +21,9 @@ class _PageLoader(object):
             return open(path).read()
         
     
-class ItemResource(JsonRpcResource):
+class PageResource(JsonRpcResource):
     _page_loader = _PageLoader()
-    ws_name = 'item'
+    ws_name = 'page'
     def __init__(self, crawler):
         JsonRpcResource.__init__(self, crawler, self._page_loader)
         
@@ -42,6 +42,54 @@ class OSResource(JsonRpcResource):
 from script import config
 class ConfigResource(JsonRpcResource):
     ws_name = 'config'
-    def __init__(self,crawler):
+    def __init__(self, crawler):
         JsonRpcResource.__init__(self, config)
         
+from crawler.model.models import ClassifyRule
+class ClassifyRuleResource(JsonRpcResource):
+    ws_name = 'classify_rule'
+    def __init__(self, crawler):
+        JsonRpcResource.__init__(self, ClassifyRule.objects)
+   
+from crawler.model.models import CrawlRule
+class CrawlRuleResource(JsonRpcResource):
+    ws_name = 'crawl_rule'
+    def __init__(self, crawler):
+        JsonRpcResource.__init__(self, CrawlRule.objects)
+   
+from crawler.model.models import Field
+class FieldResource(JsonRpcResource):
+    ws_name = 'field'
+    def __init__(self, crawler):
+        JsonRpcResource.__init__(self, Field.objects)
+   
+from crawler.model.models import Item
+class ItemResource(JsonRpcResource):
+    ws_name = 'item'
+    def __init__(self, crawler):
+        JsonRpcResource.__init__(self, Item.objects)
+   
+from crawler.model.models import Site
+class SiteResource(JsonRpcResource):
+    ws_name = 'site'
+    def __init__(self, crawler):
+        JsonRpcResource.__init__(self, Site.objects)
+   
+from crawler.model.models import SourceType
+class SourceTypeResource(JsonRpcResource):
+    ws_name = 'source_type'
+    def __init__(self, crawler):
+        JsonRpcResource.__init__(self, SourceType.objects)
+   
+from crawler.model.models import Spider
+class SpiderResource(JsonRpcResource):
+    ws_name = 'spider' 
+    def __init__(self, crawler):
+        JsonRpcResource.__init__(self, Spider.objects)
+   
+from crawler.model.models import StartUrl
+class StartUrlResource(JsonRpcResource):
+    ws_name = 'start_url'
+    def __init__(self, crawler):
+        JsonRpcResource.__init__(self, StartUrl.objects)
+   

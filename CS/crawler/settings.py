@@ -10,18 +10,23 @@
 import os
 
 #db settings
-PROJECT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),'../.scrapy')
+PROJECT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../.scrapy')
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.path.join(PROJECT_PATH, 'database.db'),                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'NAME': os.path.join(PROJECT_PATH, 'database.db'), # Or path to database file if using sqlite3.
+        'USER': '', # Not used with sqlite3.
+        'PASSWORD': '', # Not used with sqlite3.
+        'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '', # Set to empty string for default. Not used with sqlite3.
     }
 }
+
+db_path = DATABASES['default']['NAME']
+db_dir = os.path.dirname(db_path)
+if not os.path.exists(db_dir):
+    os.mkdir(db_dir)
 
 INSTALLED_APPS = (
      'crawler.model',
@@ -51,7 +56,7 @@ SPIDER_MIDDLEWARES = {
         }
 
 DEPTH_PRIORITY = 1
-DEPTH_LIMIT  = 2
+DEPTH_LIMIT = 2
 SCHEDULER_DISK_QUEUE = 'scrapy.squeue.PickleFifoDiskQueue'
 SCHEDULER_MEMORY_QUEUE = 'scrapy.squeue.FifoMemoryQueue'
 
