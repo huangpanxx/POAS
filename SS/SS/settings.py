@@ -14,6 +14,12 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+
+CRAWLSERVER = {
+                'server_address' : '192.168.0.1',
+                'server_port' : 6800,
+                'spider_port' : 6080,
+              }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -22,8 +28,21 @@ DATABASES = {
         'PASSWORD': '', # Not used with sqlite3.
         'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '', # Set to empty string for default. Not used with sqlite3.
-    }
+    },
+    'csadmin':{
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': join(PROJECT_PATH, 'database.db'), # Or path to database file if using sqlite3.
+        'USER': '', # Not used with sqlite3.
+        'PASSWORD': '', # Not used with sqlite3.
+        'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '', # Set to empty string for default. Not used with sqlite3.
+    },
 }
+
+
+DATABASE_ROUTERS = ['routers.CSDBRouter', ]
+
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

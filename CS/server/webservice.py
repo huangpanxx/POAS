@@ -37,59 +37,66 @@ import os
 class OSResource(JsonRpcResource):
     ws_name = 'os'
     def __init__(self, crawler):
-        JsonRpcResource.__init__(self, os)
-        
+        JsonRpcResource.__init__(self, crawler, os)
+
 from script import config
 class ConfigResource(JsonRpcResource):
     ws_name = 'config'
     def __init__(self, crawler):
-        JsonRpcResource.__init__(self, config)
+        JsonRpcResource.__init__(self, crawler, config)
         
+
+from crawler.model import models
+class DBModelResource(JsonRpcResource):
+    ws_name = 'db_model'
+    def __init__(self,crawler):
+        JsonRpcResource.__init__(self, crawler, models) 
+
 from crawler.model.models import ClassifyRule
 class ClassifyRuleResource(JsonRpcResource):
     ws_name = 'classify_rule'
     def __init__(self, crawler):
-        JsonRpcResource.__init__(self, ClassifyRule.objects)
+        JsonRpcResource.__init__(self, crawler, ClassifyRule.objects)
    
 from crawler.model.models import CrawlRule
 class CrawlRuleResource(JsonRpcResource):
     ws_name = 'crawl_rule'
     def __init__(self, crawler):
-        JsonRpcResource.__init__(self, CrawlRule.objects)
+        JsonRpcResource.__init__(self, crawler, CrawlRule.objects)
    
 from crawler.model.models import Field
 class FieldResource(JsonRpcResource):
     ws_name = 'field'
     def __init__(self, crawler):
-        JsonRpcResource.__init__(self, Field.objects)
+        JsonRpcResource.__init__(self, crawler, Field.objects)
    
 from crawler.model.models import Item
 class ItemResource(JsonRpcResource):
     ws_name = 'item'
     def __init__(self, crawler):
-        JsonRpcResource.__init__(self, Item.objects)
+        JsonRpcResource.__init__(self, crawler, Item.objects)
    
 from crawler.model.models import Site
 class SiteResource(JsonRpcResource):
     ws_name = 'site'
     def __init__(self, crawler):
-        JsonRpcResource.__init__(self, Site.objects)
+        JsonRpcResource.__init__(self, crawler, Site.objects)
    
 from crawler.model.models import SourceType
 class SourceTypeResource(JsonRpcResource):
     ws_name = 'source_type'
     def __init__(self, crawler):
-        JsonRpcResource.__init__(self, SourceType.objects)
+        JsonRpcResource.__init__(self, crawler, SourceType.objects)
    
 from crawler.model.models import Spider
 class SpiderResource(JsonRpcResource):
     ws_name = 'spider' 
     def __init__(self, crawler):
-        JsonRpcResource.__init__(self, Spider.objects)
+        JsonRpcResource.__init__(self, crawler, Spider.objects)
    
 from crawler.model.models import StartUrl
 class StartUrlResource(JsonRpcResource):
     ws_name = 'start_url'
     def __init__(self, crawler):
-        JsonRpcResource.__init__(self, StartUrl.objects)
+        JsonRpcResource.__init__(self, crawler, StartUrl.objects)
    

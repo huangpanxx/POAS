@@ -57,8 +57,8 @@ class ContentSavePipeline(object):
         save_dir = self.make_dir(item)
         self.make_if_missing(save_dir)
         
-        uuid = item['uuid']
-        save_path = '%s/%s' % (save_dir, uuid)
+        uuid = item['uuid'] 
+        save_path = '%s/%s' % (save_dir, uuid) 
         
         self.save_to(save_path, item['content'])
         item['save_path'] = save_path
