@@ -25,6 +25,5 @@ urlpatterns = patterns('',
     url(r'^admin/cs/', include(csadmin.urls)),
     url(r'^personal/', include(personal.urls)),
     url(r'^hot/',include(hot.urls)),
-    url(r'^grappelli/',include('grappelli.urls')),
     
 ) 
