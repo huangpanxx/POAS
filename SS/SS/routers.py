@@ -10,13 +10,13 @@ class CSDBRouter(object):
     def db_for_read(self, model, **hints):
         "Point all operations on myapp models to 'other'"
         if model._meta.app_label == 'csmodel':
-            return 'crawl'
+            return 'cs'
         return None
 
     def db_for_write(self, model, **hints):
         "Point all operations on myapp models to 'other'"
         if model._meta.app_label == 'csmodel':
-            return 'crawl'
+            return 'cs'
         return None
 
     def allow_relation(self, obj1, obj2, **hints):
@@ -27,7 +27,7 @@ class CSDBRouter(object):
 
     def allow_syncdb(self, db, model): 
         "Make sure the myapp app only appears on the 'other' db" 
-        if db == 'crawl': 
+        if db == 'cs': 
             return model._meta.app_label == 'csmodel'
         elif model._meta.app_label == 'csmodel':
             return False
