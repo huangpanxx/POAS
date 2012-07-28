@@ -31,7 +31,7 @@ DATABASES = {
     },
     'cs':{
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'cs', # Or path to database file if using sqlite3.
+        'NAME': 'csmodel', # Or path to database file if using sqlite3.
         'USER': 'poas', # Not used with sqlite3.
         'PASSWORD': 'poas', # Not used with sqlite3.
         'HOST': '10.250.62.6', # Set to empty string for localhost. Not used with sqlite3.
