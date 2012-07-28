@@ -22,7 +22,7 @@ urlpatterns = patterns('',
     url(r'^admin/$', lambda x: HttpResponseRedirect('./super/')),
     url(r'^admin/cs/', include(csadmin.urls)),
     url(r'^topic/', include(topic.urls)),
-    url(r'^personal/', include(personal.urls))
+    url(r'^personal/', include(personal.urls)),
     url(r'^hot/',include(hot.urls)),
     url(r'^grappelli/',include('grappelli.urls')),
     
