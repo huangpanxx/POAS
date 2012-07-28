@@ -6,7 +6,7 @@
 
 from scrapy.contrib_exp.djangoitem import DjangoItem
 from .model.models import Item
-from crawler.model.models import Field
+import scrapy
 
 
 #class CrawlItem(Item):
@@ -27,4 +27,4 @@ class CrawlItem(DjangoItem):
     wrapper for scrapy model
     '''
     django_model = Item
-    content      = Field()
+    content = scrapy.item.Field()

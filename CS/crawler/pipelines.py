@@ -36,20 +36,23 @@ class ContentSavePipeline(object):
             
     def make_if_missing(self, directory):
         if not os.path.exists(directory):
-            os.mkdir(directory)
+            os.makedirs(directory)
             
     def save_to(self, path, content):
         open(path, 'w').write(content)
         
-    def make_dir(self,item):
-        rule = item.classify_rule
+    def make_dir(self, item):
+        rule = item['classify_rule']
         
-        site = rule.spider.site.name
-        field = rule.field.name
-        source_type = rule.source_type.name
-        crawl_datetime = item['crawl_datetime']
+        site = rule.spider.site.name.encode('utf8')
+        field = rule.field.name.encode('utf8')
+        source_type = rule.source_type.name.encode('utf8')
         
-        save_dir = '%s/%s/%s/%s/%s' % (self.page_dir,crawl_datetime,site,source_type,field)
+        d = item['crawl_datetime']
+        crawl_datetime = '%s-%s-%s' % (d.year, d.month, d.day)
+        
+        
+        save_dir = '%s/%s/%s/%s/%s' % (self.page_dir, crawl_datetime, site, source_type, field)
         return save_dir
               
     def process_item(self, item, spider): 
@@ -62,6 +65,7 @@ class ContentSavePipeline(object):
         
         self.save_to(save_path, item['content'])
         item['save_path'] = save_path
+        return item
          
          
 class PlainTextPipeline(object): 

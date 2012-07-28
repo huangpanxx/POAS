@@ -45,11 +45,9 @@ class SinaSpider(CrawlSpider):
 
         url = response.url
         item = CrawlItem(url            =   url,
-                         domain         =   self.domain,
                          site           =   self.site_name,
                          crawl_datetime =   datetime.datetime.now(),
                          uuid           =   hashlib.md5(url).hexdigest(),
-                         model_type     =   self.model_type,
                          )
         
         #数据
