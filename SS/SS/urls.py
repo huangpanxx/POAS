@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 import csadmin
-import topic
+import hot
 import personal
 
 # Uncomment the next two lines to enable the admin:
@@ -23,5 +23,7 @@ urlpatterns = patterns('',
     url(r'^admin/cs/', include(csadmin.urls)),
     url(r'^topic/', include(topic.urls)),
     url(r'^personal/', include(personal.urls))
+    url(r'^hot/',include(hot.urls)),
+    url(r'^grappelli/',include('grappelli.urls')),
     
 ) 

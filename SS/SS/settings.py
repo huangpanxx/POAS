@@ -22,12 +22,12 @@ CRAWLSERVER = {
               }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': join(PROJECT_PATH, 'database.db'), # Or path to database file if using sqlite3.
-        'USER': '', # Not used with sqlite3.
-        'PASSWORD': '', # Not used with sqlite3.
-        'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '', # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'hot', # Or path to database file if using sqlite3.
+        'USER': 'longruiliu', # Not used with sqlite3.
+        'PASSWORD': 'liurui', # Not used with sqlite3.
+        'HOST': '10.250.62.6', # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '3306', # Set to empty string for default. Not used with sqlite3.
     },
     'crawl_server':{
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -142,11 +142,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-     'django.contrib.admin',
+    'grappelli',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'SS.csadmin',
-    'SS.topic',
+    'SS.hot',
     'SS.personal',
     'SS.csmodel',
 )
