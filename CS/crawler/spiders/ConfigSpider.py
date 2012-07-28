@@ -103,8 +103,8 @@ def _config_spider(spider_cls,spider_setting):
                 url_list = denys_not_parse
                 
         url_list.append(pattern)
-    rule_not_parse = Rule(allow=SgmlLinkExtractor(allow=allows_not_parse,deny=denys_not_parse))
-    rule_parse = Rule(allow=SgmlLinkExtractor(allow=allows_parse,deny=denys_parse),callback='parse_detail')
+    rule_not_parse = Rule(SgmlLinkExtractor(allow=allows_not_parse,deny=denys_not_parse))
+    rule_parse = Rule(SgmlLinkExtractor(allow=allows_parse,deny=denys_parse),callback='parse_detail')
     spider_cls.rules = [rule_not_parse,rule_parse]
     
     #分类设置
@@ -127,6 +127,7 @@ for i, setting in enumerate(SpiderSetting.objects.all()):
         cls_name = 'Spider%s' % (i,) 
         cls = _create_config_spider(cls_name, setting)
         #将类放入全局 
+        print cls
         globals()[cls_name] = cls 
         del cls
 

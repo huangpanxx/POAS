@@ -16,7 +16,7 @@ MANAGERS = ADMINS
 
 
 CRAWLSERVER = {
-                'server_address' : '192.168.0.1',
+                'server_address' : '127.0.0.1',
                 'server_port' : 6800,
                 'spider_port' : 6080,
               }
@@ -29,11 +29,11 @@ DATABASES = {
         'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '', # Set to empty string for default. Not used with sqlite3.
     },
-    'csadmin':{
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': join(PROJECT_PATH, 'database.db'), # Or path to database file if using sqlite3.
-        'USER': '', # Not used with sqlite3.
-        'PASSWORD': '', # Not used with sqlite3.
+    'crawl_server':{
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'csmodel', # Or path to database file if using sqlite3.
+        'USER': 'root', # Not used with sqlite3.
+        'PASSWORD': 'departure', # Not used with sqlite3.
         'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '', # Set to empty string for default. Not used with sqlite3.
     },
@@ -148,6 +148,7 @@ INSTALLED_APPS = (
     'SS.csadmin',
     'SS.topic',
     'SS.personal',
+    'SS.csmodel',
 )
 
 # A sample logging configuration. The only tangible logging

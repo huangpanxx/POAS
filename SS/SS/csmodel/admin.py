@@ -4,7 +4,7 @@ Created on 2012-7-27
 @author: snail
 '''
 from django.contrib import admin
-from csadmin.models import * #@UnusedWildImport
+from csmodel.models import * #@UnusedWildImport
 
 class SiteAdmin(admin.ModelAdmin):
     pass

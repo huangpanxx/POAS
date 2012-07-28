@@ -63,9 +63,6 @@ def project(request, project_name=""):
 def spider_settings(request, project_name, spider_name):
     return HttpResponse('Not Implement')
 
-def home(request):
-    return HttpResponseRedirect('./server/')
-
 
 def site(request, project_name):
     sites = jsonrpc_call_server('os', '__str__')

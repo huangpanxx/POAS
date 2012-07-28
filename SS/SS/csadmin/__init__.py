@@ -2,6 +2,7 @@
 from django.conf.urls.defaults import patterns, url, include
 from . import views
 from django.contrib import admin
+from django.http import HttpResponseRedirect
 
 project_urls = patterns('',
                 url(r'^(\w+)/version/$', views.project_version),
@@ -15,7 +16,7 @@ project_urls = patterns('',
 
 
 urls = patterns('',
-                url(r'^$', views.home),
+                url(r'^$', lambda x:HttpResponseRedirect('./server/')),
                 url(r'^server/$', views.server),
                 url(r'^project/', include(project_urls)),
                 
