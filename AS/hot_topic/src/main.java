@@ -63,8 +63,8 @@ public class main {
     {
     	String driver = "com.mysql.jdbc.Driver";
     	String url = "jdbc:mysql://10.250.62.6:3306/hot";
-    	String user = "longruiliu";
-    	String passwd = "liurui";
+    	String user = "poas";
+    	String passwd = "poas";
     	Connection conn = null;
     	try{
     		Class.forName(driver);
