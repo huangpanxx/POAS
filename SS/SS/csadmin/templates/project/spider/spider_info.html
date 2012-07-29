@@ -1,0 +1,133 @@
+{% if spider %}
+<table class="data" >
+	<thead>
+		<tr>
+			<th>Label</th>
+			<th>Value</th>
+		</tr>
+	</thead>
+	<tbody>
+		<style>
+			#active{
+				font:blue;
+			}
+			#not_active{
+				font:red;
+			}
+		</style>
+		<tr>
+			<td>Spider Name</td>
+			<td>{{ spider.name }}</td>
+		</tr>
+		<tr>
+			<td>Last Update</td>
+			<td>{{ spider.last_update }}</td>
+		</tr>
+		<tr>
+			<td>Site</td>
+			<td><a href="{{ spider.site.url }}">{{ spider.site }}</a></td>
+		</tr>
+		<tr>
+			<td>Update Duration</td>
+			<td>{{ spider.update_duration }}</td>
+		</tr>
+		<tr>
+			<td>Create</td>
+			<td>{{ spider.create_datetime }}</td>
+
+		</tr>
+		<tr>
+			<td>Active</td>
+			<td>
+				{% if spider.is_active %}
+				Yes
+				{% else %}
+				No
+				{% endif %}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Start Urls
+			</td>
+			<td>
+				<ol>
+					{% for url in spider.starturl_set.all %}
+					{% if url.is_active %}
+					<li class="active"> {{ url.name }} : {{ url.url }} </li>
+					{% else %}
+					<li class="not_active"> {{ url.name }} : {{ url.url }} </li>
+					{% endif %}
+					{% endfor %}
+				</ol>
+			</td>
+			<tr>
+				<td>
+					CrawlRule
+				</td>
+				<td>
+					<ol>
+						{% for rule in spider.crawlrule_set.all %}
+
+						{% if rule.is_active %}
+						<li class="active">
+						{% else %}
+						<li class="not_active">
+						{% endif %}
+
+						{{ rule.name }}:{{ rule.url_pattern }}
+
+
+						{% if rule.is_active %}
+						active 
+						{% else %}
+						forbdden 
+						{% endif %}
+
+						{% if rule.is_allow %} 
+						allow 
+						{% else %}
+						deny 
+						{% endif %}
+
+
+						</li>
+
+						{% endfor %}
+					</ol>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Classify Rule
+				</td>
+				<td>
+					<ol>
+						{% for rule in spider.classifyrule_set.all %}
+
+						{% if rule.is_active %}
+						<li class="active">
+						{% else %}
+						<li class="not_active">
+						{% endif %}
+
+						{{ rule.source_type.name }}.{{ rule.field.name }}: {{ rule.url_pattern }}  
+						{% if rule.is_active %}
+						active 
+						{% else %}
+						forbdden 
+						{% endif %}
+
+
+
+
+						{% endfor %}
+					</ol>
+				</td>
+			</tr>
+		</tr>
+	</tbody>
+</table>
+{% else %}
+This spider is not exist
+{% endif %}

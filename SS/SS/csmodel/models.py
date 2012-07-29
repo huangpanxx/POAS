@@ -84,11 +84,16 @@ class CrawlRule(models.Model):
     spider = models.ForeignKey(Spider)              #适用的爬虫 
     url_pattern = models.CharField(max_length=255)  #url模式 
     is_allow = models.BooleanField(default=True)    #抓取/忽略 
-    is_active = models.BooleanField(default=False)  #是否激活
-    is_parse = models.BooleanField(default=True) #是否解析
+    is_active = models.BooleanField(default=True)  #是否激活
+    is_parse = models.BooleanField(default=False) #是否解析
+    name = models.CharField(max_length=255)
     
     def __unicode__(self):
-        return self.url_pattern
+        return '%s.%s:%s  %s %s' % (
+                                    self.spider.name ,
+                                    self.name,
+                                    self.url_pattern, self.is_allow and 'allow' or 'deny',
+                                    self.is_active and 'active' or 'forbidden')
     
     class Meta(object):
         db_table = 'CrawlRule'

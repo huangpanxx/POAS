@@ -44,4 +44,11 @@ class ConfigResource(JsonRpcResource):
     ws_name = 'config'
     def __init__(self, crawler):
         JsonRpcResource.__init__(self, crawler, config)
+
+
+import platform
+class PlatformResource(JsonRpcResource):
+    ws_name = 'platform'
+    def __init__(self,crawler):
+        JsonRpcResource.__init__(self,crawler,platform)
         

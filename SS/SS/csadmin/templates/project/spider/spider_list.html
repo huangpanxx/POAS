@@ -1,0 +1,7 @@
+{% if spiders %}
+<ol>
+	{% for spider in spiders %}
+	<li><a href="/admin/cs/project/{{ project_name }}/spider/{{ spider.id}}">{{ spider.name }}</a></li>
+	{% endfor %}
+</ol>
+{% endif %}

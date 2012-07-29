@@ -1,21 +1,33 @@
 {% if spiders %}
 <h2>Spiders</h2>
-{% if spiders.status == 'ok' %}
 <table class="data display datatable">
 	<thead>
 		<tr>
 			<th>Spider Name</th>
+			<th>Last Update</th>
+			<th>Site</th>
+			<th>Update Duration</th>
+			<th>Create</th>
+			<th>Active</th>
 		</tr>
 	</thead>
 	<tbody>
-		{% for spider in spiders.spiders %}
+		{% for spider in spiders %}
 		<tr>
-			<td><a href="./{{spider}}">{{ spider }}</a></td>
+			<td><a href="./{{spider.id}}">{{ spider.name }}</a></td>
+			<td>{{ spider.last_update }}</td>
+			<td><a href="{{ spider.site.url }}">{{ spider.site.name }}</a></td>
+			<td>{{ spider.update_duration }}</td>
+			<td>{{ spider.create_datetime }}</td>
+			<td>
+				{% if spider.is_active %}
+				Yes
+				{% else %}
+				No
+				{% endif %}
+			</td>
 		</tr>
 		{% endfor %}
 	</tbody>
 </table>
-{% else %}
-<h2>Error:{{ spiders.message }}</h2>
-{% endif %}
 {% endif %}

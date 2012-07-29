@@ -1,0 +1,15 @@
+{% extends "grid_base.html" %}
+
+{% block tag_name %}
+"nav_cache"
+{% endblock %}
+
+{% block grid_title %}
+{% if cache_name %}
+Cache - {{ cache_name }}
+{% else %}
+Cache
+{% endif %}
+{% endblock %}
+
+

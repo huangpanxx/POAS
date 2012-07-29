@@ -1,0 +1,8 @@
+{% if sites %}
+<ol>
+	{% for site in sites %}
+	<li><a href="/admin/cs/site/{{ site.id }}">{{ site.name }}</a></li>
+	{% endfor %}
+</ol>
+{% endif %}
+
