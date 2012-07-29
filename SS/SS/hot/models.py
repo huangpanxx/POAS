@@ -9,15 +9,18 @@ class Lexical(models.Model):
     date = models.DateField()
     def __unicode__(self):
         return self.value
-    
 
 class Doc(models.Model):
-    id = models.IntegerField(primary_key = True)
     url = models.CharField(max_length = 200)
+    path = models.CharField(max_length = 200)
     length = models.IntegerField()
     size = models.IntegerField()
+    source_type = models.CharField(max_length = 255)
     field = models.CharField(max_length = 10)
     date = models.DateField()
+    
+    class Meta:
+        db_table = 'Document'
     
 class Lex_Doc(models.Model):
     Lexical = models.ForeignKey(Lexical)
