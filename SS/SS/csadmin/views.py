@@ -92,11 +92,11 @@ def project(request, project_name=""):
                               context_instance=RequestContext(request))
     
 def spider_info(request, project_name, spider_id):
-    spiders = Spider.objects.filter(id=int(spider_id))
-    
+    _spiders = Spider.objects.filter(id=int(spider_id))
+    spiders = Spider.objects.all()
     spider = None
-    if spiders.count() > 0:
-        spider = spiders[0]
+    if _spiders.count() > 0:
+        spider = _spiders[0]
     
     return render_to_response('project/spider/spider.html',
                               {'spider':spider,
