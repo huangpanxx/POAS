@@ -2,7 +2,7 @@
 from django.http import HttpResponseRedirect
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
-from csadmin.utils import json_get_server, json_post_server, jsonrpc_call_server
+from csadmin.utils import json_get_server, jsonrpc_call_server
 from django.conf import settings
 from csmodel.models import Spider, Site
 

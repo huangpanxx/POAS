@@ -51,7 +51,7 @@ class Spider(models.Model):
     
     create_datetime = models.DateTimeField(max_length=255) #创建时间
     last_update = models.DateTimeField(default=datetime.datetime.now())
-    update_duration = models.IntegerField(0) #更新间隔(分钟)
+    update_duration = models.IntegerField(default=0) #更新间隔(分钟)
     is_active = models.BooleanField(default=False) #是否激活
     
     def __unicode__(self):
@@ -84,11 +84,12 @@ class CrawlRule(models.Model):
     spider = models.ForeignKey(Spider)              #适用的爬虫 
     url_pattern = models.CharField(max_length=255)  #url模式 
     is_allow = models.BooleanField(default=True)    #抓取/忽略 
-    is_active = models.BooleanField(default=False)  #是否激活
-    is_parse = models.BooleanField(default=True) #是否解析
+    is_active = models.BooleanField(default=True)  #是否激活
+    is_parse = models.BooleanField(default=False) #是否解析
+    name = models.CharField(max_length=255)
     
     def __unicode__(self):
-        return self.url_pattern
+        return self.name
     
     class Meta(object):
         db_table = 'CrawlRule'
@@ -105,7 +106,7 @@ class ClassifyRule(models.Model):
     is_active = models.BooleanField(default=False)  #是否激活
     
     def __unicode__(self):
-        return self.url_pattern
+        return '%s.%s.%s' % (self.spider.name, self.source_type.name, self.field.name)
     
     class Meta(object):
         db_table = 'ClassifyRule' 
