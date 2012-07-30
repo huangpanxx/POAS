@@ -32,23 +32,28 @@ public class main {
 		HashSet<Lexical> word = new HashSet<Lexical>();
 		ArrayList<String> stop_word = new ArrayList<String>();
 		float a = (float) 0.8,b = (float) 0.2;
+		String[] fields = new String[]{"Olympic","economy","culture"};
 		
-		//get data from files,arraylist<Document>,set<Lexical> and stop_word
+		//get data from files,ArrayList<Document>,set<Lexical> and stop_word
 		input_stop(stop_word);
-		input(doc,word,stop_word);
 
-		//compute the weight
-		compute(doc,word,a,b);
-//		for (Lexical tmp:word)
-//			tmp.print();
-//		for (Document tmp:doc)
-//			tmp.print();
-	
+		for (int i = 0;i < fields.length;i++)
+		{
+			input(doc,word,stop_word,fields[i]);
+
+			//compute the weight
+			compute(doc,word,a,b);
+//			for (Lexical tmp:word)
+//				tmp.print();
+//			for (Document tmp:doc)
+//				tmp.print();
 		
-		//write back to db
-		Connection conn = connect_db();
-		write_back(conn,doc,word);
-		conn.close();
+			
+			//write back to database
+			Connection conn = connect_db();
+			write_back(conn,doc,word,fields[i]);
+			conn.close();
+		}
 	}
 
 	private static void input_stop(ArrayList<String> stop_word) throws IOException {
@@ -83,28 +88,23 @@ public class main {
     	return conn;
     }
 	
-	static void input(ArrayList<Document> doc,HashSet<Lexical> word, ArrayList<String> stop_word) throws IOException, SQLException
-	{
-		File file = new File("src/test/");
-		File[] file_list = file.listFiles();
-		int doc_has = 0;    //there are how many doc in the db
-		 
+	static void input(ArrayList<Document> doc,HashSet<Lexical> word, ArrayList<String> stop_word, String field) throws IOException, SQLException
+	{ 
 		Connection conn = connect_db();
 		Statement statement = conn.createStatement();
-		ResultSet rs = statement.executeQuery("show table status from hot like 'hot_doc'");
+		ResultSet rs = statement.executeQuery("select * from Document where field = '"+field+"' and date = now()");
 		while (rs.next())
-			doc_has = rs.getInt("Rows");
-		conn.close();
-		
-		for (int i = 1;i <= file_list.length;i++)
 		{
-			 BufferedReader fin = new BufferedReader(new FileReader(file_list[i - 1]));  
+			int pk = rs.getInt("id");
+			String filename = rs.getString("path");
+			
+            BufferedReader fin = new BufferedReader(new FileReader(filename));  
 			 
-			 Document doc_tmp = new Document(i + doc_has,"news");
-		     String line = fin.readLine();
-		     int file_length = 0,file_size = 0;
-		     while(line != null)
-		     {  
+            Document doc_tmp = new Document(pk);
+		    String line = fin.readLine();
+		    int file_length = 0,file_size = 0;
+		    while(line != null)
+		    {  
 		    	 StringTokenizer str = new StringTokenizer(line, " ");  
 		    	 while (str.hasMoreTokens())
 		    	 {
@@ -131,9 +131,9 @@ public class main {
 			    				 if (it.equals(word_tmp))
 			    				 {
 			    					//whether the word has shown in this article.
-			    					 if (it.get_pos(i) == -1)
-			    						 it.set_pos(i, file_size);
-			    					 it.add_times(i);
+			    					 if (it.get_pos(pk) == -1)
+			    						 it.set_pos(pk, file_size);
+			    					 it.add_times(pk);
 			    					 mark = 1;
 			    					 break;
 			    				 }
@@ -141,8 +141,8 @@ public class main {
 		    			 }
 		    			 if (mark == 0)
 		    			 {
-		    				 word_tmp.add_times(i);
-		    				 word_tmp.set_pos(i, file_size);
+		    				 word_tmp.add_times(pk);
+		    				 word_tmp.set_pos(pk, file_size);
 		    				 word.add(word_tmp);
 		    			 }
 		    			 file_size++;
@@ -150,12 +150,13 @@ public class main {
 		    		 }
 		    	 }
 		         line = fin.readLine();  
-		      } 
+		     } 
 		     doc_tmp.set_len(file_length);
 		     doc_tmp.set_size(file_size);
 		     doc.add(doc_tmp);
 		     fin.close();  
 		}
+		conn.close();
 	}
 
 	private static boolean in_stop(String string, ArrayList<String> stop_word) {
@@ -194,22 +195,20 @@ public class main {
 		}
 	}
 	
-	static void write_back(Connection conn,ArrayList<Document> doc,HashSet<Lexical> word) throws SQLException
+	static void write_back(Connection conn,ArrayList<Document> doc,HashSet<Lexical> word, String field) throws SQLException
 	{
 		Statement statement = conn.createStatement();
-		//write to hot_doc
+		//write to Document
 		for (Document tmp:doc)
 		{
 			int pk = tmp.get_pk();
 			int length = tmp.length();
 			int size = tmp.get_size();
-			String s_url = tmp.get_url();
-			String field = tmp.get_field(); 
 			
-			statement.executeUpdate("insert into hot_doc (id,url,length,size,field,date) values ('"+pk+"','"+s_url+"','"+length+"','"+size+"','"+field+"',now())");
+			statement.executeUpdate("update Document set length = '"+length+"',size = '"+size+"' where id = '"+pk+"'");
 		}
 		
-		//write to hot_lexical
+		//write to Lex
 		for (Lexical tmp:word)
 		{
 			String value = tmp.value();
@@ -217,15 +216,15 @@ public class main {
 			String part_of_speech = tmp.part();
 			float weight = tmp.total_weight();
 			
-			statement.executeUpdate("insert into hot_lexical (value,length,part_of_speech,total_weight,date) values ('"+value+"','"+length+"','"+part_of_speech+"','"+weight+"',now())");
+			statement.executeUpdate("insert into Lex (value,length,part_of_speech,field,total_weight,date) values ('"+value+"','"+length+"','"+part_of_speech+"','"+field+"','"+weight+"',now())");
 		}
 		
-		//write to hot_lex_doc
+		//write to Lex_Doc
 		for (Lexical tmp:word)
 		{
 			String value = tmp.value();
 			int lexical_id = 0;
-			ResultSet rs = statement.executeQuery("select id from hot_lexical where value = '"+value+"'");
+			ResultSet rs = statement.executeQuery("select id from Lex where value = '"+value+"'");
 			while (rs.next())
 				lexical_id = rs.getInt("id");
 			for (Integer pk:tmp.get_map().keySet())
@@ -233,7 +232,7 @@ public class main {
 				int times = tmp.get_times(pk);
 				int first_pos = tmp.get_pos(pk);
 				
-				statement.executeUpdate("insert into hot_lex_doc (Lexical_id,Doc_id,times,first_pos,date) values ('"+lexical_id+"','"+pk+"','"+times+"','"+first_pos+"',now())");
+				statement.executeUpdate("insert into Lex_Doc (Lex_id,Doc_id,times,first_pos,date) values ('"+lexical_id+"','"+pk+"','"+times+"','"+first_pos+"',now())");
 			}
 		}
 	}
