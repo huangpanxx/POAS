@@ -1,0 +1,14 @@
+{% extends "grid_base.html" %}
+
+{% block tag_name %}
+"nav_project"
+{% endblock %}
+
+{% block grid_title %}
+Project
+{% endblock %}
+
+{% block grid_content %}
+<h2>Select a project</h2> 
+{% include "project/project_list.html" %}
+{% endblock %}

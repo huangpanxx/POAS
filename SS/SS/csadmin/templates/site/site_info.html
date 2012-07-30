@@ -1,0 +1,49 @@
+{% extends "site/site_sidebar_base.html" %}
+
+{% block info %}
+<table class="data display">
+	<thead>
+		<tr>
+			<th>Label</th>
+			<th>Value</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Name</td>
+			<td>{{ site.name }}</td>
+		</tr>
+		<tr>
+			<td>Url</td>
+			<td>{{ site.url }}</td>
+		</tr>
+		<tr>
+			<td>Domain</td>
+			<td>{{ site.domain }}</td>
+		</tr>
+		<tr>
+			<td>Spiders</td>
+			<td>
+				<ol> 
+
+					{% for spider in site.spider_set.all %}
+					<li>
+					<a href="/admin/cs/project/default/spider/{{ spider.id }}">
+					{{ spider.name }}
+					</a>
+					</li>
+					{% endfor %}
+				</ol>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+{% endblock %}
+
+
+{% block side_bar %}
+<h2>Avaliable Sites</h2>
+{% include "site/site_list.html" %}
+{% endblock %}
+

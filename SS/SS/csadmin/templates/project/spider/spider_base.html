@@ -1,0 +1,11 @@
+{% extends "project/project_side_base.html" %}
+
+{% block project_navigate_tag %}
+"spider"
+{% endblock %}
+
+
+{% block side_bar %}
+<h2>Available Spiders</h2>
+{% include "project/spider/spider_list.html" %}
+{% endblock %}

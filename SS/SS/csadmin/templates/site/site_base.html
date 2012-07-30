@@ -1,0 +1,15 @@
+{% extends "grid_base.html" %}
+
+{% block tag_name %}
+"nav_site"
+{% endblock %}
+
+{% block grid_title %}
+{% if site_name %}
+Site - {{ site_name }}
+{% else %}
+Site
+{% endif %}
+{% endblock %}
+
+

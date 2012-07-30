@@ -1,5 +1,11 @@
 {% if settings %}
 <table class="data display">
+	<thead>
+		<tr>
+			<th>Label</th>
+			<th>Value</th>
+		</tr>
+	</thead>
 	<tbody>
 		<tr>
 			<td><b>Address</b></td>
@@ -13,6 +19,59 @@
 			<td><b>Spider Port</b></td>
 			<td>{{ settings.spider_port }}</td>
 		</tr>
+		<tr>
+			<td><b>System</b></td>
+			<td>{{ server.system }}</td>
+		</tr>
+		<tr>
+			<td><b>Version</b></td>
+			<td>{{ server.version }}</td>
+		</tr>
+		<tr>
+			<td><b>Architecture</b></td>
+			<td>{{ server.architecture }}</td>
+		</tr>
+
+
+
+
+		<tr>
+			<td><b>Node</b></td>
+			<td>{{ server.node }}</td>
+		</tr>
+
+		<tr>
+			<td><b>Platform</b></td>
+			<td>{{ server.platform }}</td>
+		</tr>		
+		<tr>
+			<td><b>Machine</b></td>
+			<td>{{ server.machine }}</td>
+		</tr>
+		<tr>
+			<td><b>Processor</b></td>
+			<td>{{ server.processor }}</td>
+		</tr>
+		<tr>
+			<td><b>Python Build</b></td>
+			<td>{{ server.python_build }}</td>
+		</tr>
+		<tr>
+			<td><b>Python Compiler</b></td>
+			<td>{{ server.python_compiler }}</td>
+		</tr>
+		<tr>
+			<td><b>Python Version</b></td>
+			<td>{{ server.python_version }}</td>
+		</tr>	
+		<tr>
+			<td><b>Release</b></td>
+			<td>{{ server.release }}</td>
+		</tr>
+		<tr>
+			<td><b>Uname</b></td>
+			<td>{{ server.uname }}</td>
+		</tr>		
 	</tbody>
 </table>
 {% endif %}

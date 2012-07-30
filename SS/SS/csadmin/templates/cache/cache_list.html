@@ -1,0 +1,8 @@
+{% if keys %}
+<ol>
+	{% for key in keys %}
+	<li><a href="/admin/cs/cache/{{ key }}">{{ key }}</a></li>
+	{% endfor %}
+</ol>
+{% endif %}
+
