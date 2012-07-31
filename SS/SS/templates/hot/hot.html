@@ -3,25 +3,46 @@
 {% block title %}Hot Topic{% endblock %}
 
 {% block content %}
+
+<form action="" method="post" accept-charset="utf-8">{% csrf_token %}
+	<div class="dataTables_length">
+	Field:
+	<select name="field" size = "1">
+		<option value="Olympics">Olympics</option>
+		<option value="Education">Education</option>
+	</select>
+	Date:
+	<select name="type" size = "1">
+		<option value="Today">Today</option>
+		<option value="Week">Week</option>
+	</select>
+	</div>
+<input type="submit" value="go" />
+</form>
+
+
 <table class="data datatable">
+</input>
 	<thead>
 		<tr>
-			<th>word_id</th>
+			<th>weight</th> 
 			<th>value</th>
-                        <th>part_of_speech</th>
-                        <th>weight</th>
+                        <th>part_of_speech</th>  
+			<th>id</th>                
 		</tr>
 	</thead>
 	
 	<tbody>
                {% for word in words %}
 		<tr>
-			<td>{{word.id}}</td>
+			<td  >{{word.total_weight}}</td>
 			<td>{{word.value}}</td>
                         <td>{{word.part_of_speech}}</td>
-                        <td>{{word.total_weight}}</td>
+			<td>{{word.id}}</td>
 		</tr>
                {% endfor %}
+
 	</tbody>
 </table>
+{{test}}
 {% endblock %}
