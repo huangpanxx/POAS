@@ -96,7 +96,7 @@ def _config_spider(spider_cls, spider_setting):
             
         url_list.append(pattern)
     
-    rule = Rule(SgmlLinkExtractor(allow=allows, deny=denys), callback='parse_detail')
+    rule = Rule(SgmlLinkExtractor(allow=allows, deny=denys), callback='parse_detail',follow=True)
     
     spider_cls.rules = (rule,)
     
