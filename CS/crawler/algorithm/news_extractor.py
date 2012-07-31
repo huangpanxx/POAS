@@ -17,7 +17,7 @@ def preProcess(html):
 	html = re.sub(r"(?s)\s<img.*?>.*?</img>", '', html)
 
 	#段落处理(缩进)
-	lines = re.split(r'(?i)\s*<p(\s.*?)?>', html) #p pre
+	lines = re.split(r'(?i)\s*<p.*?>', html) #p pre
 	lines = [i for i in lines if i] #去除 None
 
 	tags = ('span', 'a', 'strong') #不换行的标签

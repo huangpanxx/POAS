@@ -83,31 +83,22 @@ def _config_spider(spider_cls, spider_setting):
         start_urls.append(url)
     spider_cls.start_urls = start_urls
     
-    allows_parse = [] #抓取规则 
-    denys_parse = [] 
-    allows_not_parse = []
-    denys_not_parse = []
+    allows = [] #抓取规则 
+    denys = [] 
+    
     for rule in spider_setting.crawlrule_set.filter(is_active=True): 
         pattern = rule.url_pattern.encode('utf8')
         is_allow = rule.is_allow
-        is_parse = rule.is_parse
-        if is_parse:
-            if is_allow:
-                url_list = allows_parse
-            else:
-                url_list = denys_parse
+        if is_allow:
+            url_list = allows
         else:
-            if is_allow:
-                url_list = allows_not_parse
-            else:
-                url_list = denys_not_parse
-                
+            url_list = denys
+            
         url_list.append(pattern)
     
-    rule_not_parse = Rule(SgmlLinkExtractor(allow=allows_not_parse, deny=denys_not_parse))
-    rule_parse = Rule(SgmlLinkExtractor(allow=allows_parse, deny=denys_parse), callback='parse_detail')
+    rule = Rule(SgmlLinkExtractor(allow=allows, deny=denys), callback='parse_detail')
     
-    spider_cls.rules = (rule_not_parse, rule_parse)
+    spider_cls.rules = (rule,)
     
     
     #分类设置

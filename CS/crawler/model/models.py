@@ -85,7 +85,6 @@ class CrawlRule(models.Model):
     url_pattern = models.CharField(max_length=255)  #url模式 
     is_allow = models.BooleanField(default=True)    #抓取/忽略 
     is_active = models.BooleanField(default=True)  #是否激活
-    is_parse = models.BooleanField(default=False) #是否解析
     name = models.CharField(max_length=255)
     
     def __unicode__(self):
