@@ -30,7 +30,7 @@ class StartUrlAdmin(admin.ModelAdmin):
     
 class CrawlRuleAdmin(admin.ModelAdmin):
     list_display = ('spider', 'name', 'url_pattern', 'is_allow',
-                    'is_active', 'is_parse')
+                    'is_active')
     list_display_links = list_display
 
 class ClassifyRuleAdmin(admin.ModelAdmin):
