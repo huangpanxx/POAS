@@ -52,19 +52,19 @@ class ContentSavePipeline(object):
         crawl_datetime = '%s-%s-%s' % (d.year, d.month, d.day)
         
         
-        save_dir = '%s/%s/%s/%s/%s' % (self.page_dir, crawl_datetime, site, source_type, field)
+        save_dir = '%s/%s/%s/%s' % (crawl_datetime, site, source_type, field)
         return save_dir
               
     def process_item(self, item, spider): 
-        
-        save_dir = self.make_dir(item)
+        relate_dir = self.make_dir(item)
+        save_dir = '%s/%s' % (self.page_dir,relate_dir)
         self.make_if_missing(save_dir)
         
         uuid = item['uuid'] 
         save_path = '%s/%s' % (save_dir, uuid) 
         
         self.save_to(save_path, item['content'])
-        item['save_path'] = save_path
+        item['save_path'] = relate_dir
         return item
          
          
