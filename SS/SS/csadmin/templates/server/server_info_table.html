@@ -29,7 +29,13 @@
 		</tr>
 		<tr>
 			<td><b>Architecture</b></td>
-			<td>{{ server.architecture }}</td>
+			<td>
+				<ul>
+					{% for i in server.architecture %}
+					<li>{{ i }}</li>
+					{% endfor %}
+				</ul>
+			</td>
 		</tr>
 
 
@@ -54,7 +60,13 @@
 		</tr>
 		<tr>
 			<td><b>Python Build</b></td>
-			<td>{{ server.python_build }}</td>
+			<td>
+				<ul>
+					{% for i in server.python_build %}
+					<li>{{ i }}</li>
+					{% endfor %}
+				</ul>
+			</td>
 		</tr>
 		<tr>
 			<td><b>Python Compiler</b></td>
@@ -69,8 +81,14 @@
 			<td>{{ server.release }}</td>
 		</tr>
 		<tr>
-			<td><b>Uname</b></td>
-			<td>{{ server.uname }}</td>
+			<td><b>UName</b></td>
+			<td>
+				<ul>
+					{% for i in server.uname %}
+					<li>{{ i }}</li>
+					{% endfor %}
+				</ul>
+			</td>
 		</tr>		
 	</tbody>
 </table>

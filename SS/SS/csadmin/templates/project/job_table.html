@@ -5,20 +5,23 @@
 	<thead>
 		<tr>
 			<th>Job Id</th>
+			<th>Spider</th>
 			<th>Status</th>
 		</tr>
 	</thead>
 	<tbody>
 		{% for job in jobs.pending %}
 		<tr>
-			<td>{{ job }}</td>
+			<td>{{ job.id }}</td>
+			<td>{{ job.spider }}</td>
 			<td class="center">pending</td>
 		</tr>
 		{% endfor %}
 
 		{% for job in jobs.running %}
 		<tr>
-			<td> {{ job }}</td>
+			<td> {{ job.id }}</td>
+			<td>{{ job.spider }}</td>
 			<td class="center">running</td>
 		</tr>
 		{% endfor %}
@@ -26,7 +29,8 @@
 
 		{% for job in jobs.finished %}
 		<tr>
-			<td>{{ job }}</td>
+			<td>{{ job.id }}</td>
+			<td>{{ job.spider }}</td>
 			<td class="center">finished</td>
 		</tr>
 		{% endfor %}
