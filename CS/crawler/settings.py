@@ -37,6 +37,7 @@ DATABASES = {
 #
 #if not os.path.exists(db_dir):
 #    os.mkdir(db_dir)
+TIME_ZONE = 'Asia/Shanghai'
 
 INSTALLED_APPS = (
      'crawler.model',
