@@ -15,6 +15,7 @@ def preProcess(html):
 	html = re.sub(r"(?s)\s*<style.*?>.*?</style>", '', html)
 	html = re.sub(r"&.{2,5};|&#.{2,5};", '', html)
 	html = re.sub(r"(?s)\s<img.*?>.*?</img>", '', html)
+	html = re.sub(r"(?s)\s<textarea.*?>.*?</textarea>",'',html)
 
 	#段落处理(缩进)
 	lines = re.split(r'(?i)\s*<p.*?>', html) #p pre
