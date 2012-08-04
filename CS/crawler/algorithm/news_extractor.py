@@ -3,6 +3,7 @@
 import urllib2
 import re
 from crawler.utils.charset import decodeHtml
+from .readability import Readability
 
 
 
@@ -153,12 +154,15 @@ def getCommentNbr(text):
 	return None
 
 def parseHtml(html, blocksWidth=3, threshold=100):
-	title = getTitle(html)
+	r = Readability(html,'')
+	#title = getTitle(html)
 	html = preProcess(html)
 	commentNbr = getCommentNbr(html)
 	datetime = getDateTime(html)
+	title = r.title.encode('utf8')
+	text = r.content.encode('utf8')
 	
-	text = getText(html, blocksWidth, threshold)
+	#text = getText(html, blocksWidth, threshold)
 	return {'title':title,
 			'datetime':datetime,
 			'text':text,
