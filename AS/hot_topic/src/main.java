@@ -32,14 +32,14 @@ public class main {
 		HashSet<Lexical> word = new HashSet<Lexical>();
 		ArrayList<String> stop_word = new ArrayList<String>();
 		float a = (float) 0.8,b = (float) 0.2;
-		String[] fields = new String[]{"政务","军事"};
+		String[] sources = new String[]{"新闻","博客","论坛"};
 		
 		//get data from files,ArrayList<Document>,set<Lexical> and stop_word
 		input_stop(stop_word);
 
-		for (int i = 0;i < fields.length;i++)
+		for (int i = 0;i < sources.length;i++)
 		{
-			input(doc,word,stop_word,fields[i]);
+			input(doc,word,stop_word,sources[i]);
 
 			//compute the weight
 			compute(doc,word,a,b);
@@ -51,7 +51,7 @@ public class main {
 			
 			//write back to database
 			Connection conn = connect_db();
-			write_back(conn,doc,word,fields[i]);
+			write_back(conn,doc,word,sources[i]);
 			conn.close();
 		}
 	}
@@ -88,11 +88,11 @@ public class main {
     	return conn;
     }
 	
-	static void input(ArrayList<Document> doc,HashSet<Lexical> word, ArrayList<String> stop_word, String field) throws IOException, SQLException
+	static void input(ArrayList<Document> doc,HashSet<Lexical> word, ArrayList<String> stop_word, String source) throws IOException, SQLException
 	{ 
 		Connection conn = connect_db();
 		Statement statement = conn.createStatement();
-		ResultSet rs = statement.executeQuery("select * from Document where field = '"+field+"' and date = curdate()");
+		ResultSet rs = statement.executeQuery("select * from Document where field = '"+source+"' and date = curdate()");
 		while (rs.next())
 		{
 			int pk = rs.getInt("id");
@@ -195,7 +195,7 @@ public class main {
 		}
 	}
 	
-	static void write_back(Connection conn,ArrayList<Document> doc,HashSet<Lexical> word, String field) throws SQLException
+	static void write_back(Connection conn,ArrayList<Document> doc,HashSet<Lexical> word, String source) throws SQLException
 	{
 		Statement statement = conn.createStatement();
 		//write to Document
@@ -216,7 +216,7 @@ public class main {
 			String part_of_speech = tmp.part();
 			float weight = tmp.total_weight();
 			
-			statement.executeUpdate("insert into Lex (value,length,part_of_speech,field,total_weight,date) values ('"+value+"','"+length+"','"+part_of_speech+"','"+field+"','"+weight+"',curdate())");
+			statement.executeUpdate("insert into Lex (value,length,part_of_speech,field,total_weight,date) values ('"+value+"','"+length+"','"+part_of_speech+"','"+source+"','"+weight+"',curdate())");
 		}
 		
 		//write to Lex_Doc
@@ -244,7 +244,7 @@ public class main {
 			String value = tmp.value();
 			double weight = tmp.show_times() * 1.0 / doc_size;
 			
-			statement.executeUpdate("insert into IDF (value,weight,field) values ('"+value+"','"+weight+"','"+field+"')");
+			statement.executeUpdate("insert into IDF (value,weight,field) values ('"+value+"','"+weight+"','"+source+"')");
 		}
 	}
 	
