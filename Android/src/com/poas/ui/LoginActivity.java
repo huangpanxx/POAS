@@ -1,15 +1,18 @@
 package com.poas.ui;
 
+import java.io.IOException;
 import com.example.poas.R;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginActivity extends Activity implements OnClickListener {
 	Button _btn_login = null;
@@ -50,6 +53,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v == this._btn_exit) {
+			this.saveSettings();
 			this.finish();
 		}
 		if (v == this._btn_login) {
@@ -58,13 +62,43 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 	}
 
+	private HttpResponse getCheckResponse(String username, String password)
+			throws IOException {
+		String params = String.format("username=%s&password=%s", username,
+				password);
+		return Http.sendGetRequest(this._txt_address.getText().toString()
+				+ "/wap/login/", params);
+	}
+
 	private void login() {
+		String username = _txt_username.getText().toString();
+		String password = _txt_password.getText().toString();
+		// check
+		try {
+			HttpResponse resp = getCheckResponse(username, password);
+			Log.d("login", String.format("%s:%s", resp.data, resp.cookie));
+			boolean success = "success".equals(resp.data);
+			if (success) {
+				this.enterMainActivity(resp.cookie);
+			} else {
+				Toast.makeText(getApplicationContext(), "认证失败",
+						Toast.LENGTH_SHORT).show();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Toast.makeText(getApplicationContext(), "连接网络失败",
+					Toast.LENGTH_SHORT).show();
+		}
+
+	}
+
+	private void saveSettings() {
 		String username = _txt_username.getText().toString();
 		String password = _txt_password.getText().toString();
 		String address = _txt_address.getText().toString();
 		boolean is_save = _checkBox_save.isChecked();
-		// check
-		/******/
+
 		// save
 		_settings.set("username", username);
 		_settings.set("address", address);
@@ -72,8 +106,12 @@ public class LoginActivity extends Activity implements OnClickListener {
 		if (is_save) {
 			_settings.set("password", password);
 		}
-		// enter
+	}
+
+	private void enterMainActivity(String cookie) {
+		this.saveSettings();
 		Intent intent = new Intent(this, MainActivity.class);
+		intent.putExtra("cookie", cookie);
 		startActivity(intent);
 		this.finish();
 	}
