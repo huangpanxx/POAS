@@ -1,5 +1,5 @@
-from django.conf.urls import patterns
+from django.conf.urls.defaults import patterns
 from wap import views
 urls = patterns('',
-                '^login/$', views.login_view,
+                (r'^login/$', views.login_view),
                  )
