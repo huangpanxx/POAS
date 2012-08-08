@@ -8,8 +8,8 @@ class Lexical(models.Model):
     field = models.CharField(max_length = 255)
     total_weight = models.FloatField()
     date = models.DateField()
-    def __unicode__(self):
-        return self.value
+    def __str__(self):
+        return self.value.encode('utf-8')
     class Meta:
         db_table = 'Lex'
 
@@ -22,6 +22,8 @@ class Doc(models.Model):
     title = models.CharField(max_length = 255)
     field = models.CharField(max_length = 255)
     date = models.DateField()
+    def __str__(self):
+        return self.title.encode('utf-8')
     
     class Meta:
         db_table = 'Document'
