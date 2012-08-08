@@ -22,7 +22,6 @@ public class MainActivity extends Activity {
 
 	}
 
-	final String SETTING_FILE = "setting.ini";
 	final String LOCAL_BASE = "file:///android_asset";
 	final String HOME_URL = "/dossier/index.html";
 	final String LOGIN_URL = "/dossier/index.html";
@@ -43,7 +42,7 @@ public class MainActivity extends Activity {
 
 	@SuppressLint({ "HandlerLeak" })
 	private void initialize() {
-		this._settings = new Settings(this.getApplication(), this.SETTING_FILE);
+		this._settings = Settings.instance(this.getApplication());
 		this._webInterface = new WebInterface(this._settings);
 		this._webClient = new WebClient();
 		this._processDialog = new ProgressDialog(this);
@@ -83,7 +82,6 @@ public class MainActivity extends Activity {
 		this._webView.loadUrl(LOCAL_BASE + url);
 	}
 
-	@SuppressWarnings("unused")
 	private void navigate_remote(String url) {
 		final String address = _settings.get("address", "10.250.62.6");
 		final String abs_url = address + url;
@@ -92,6 +90,7 @@ public class MainActivity extends Activity {
 				public void run() {
 					_handler.sendEmptyMessage(0);
 					_webView.loadUrl(abs_url);
+					_handler.sendEmptyMessage(1);
 				}
 			}.start();
 		} else {
@@ -108,10 +107,15 @@ public class MainActivity extends Activity {
 		Log.d("onOptionItemSelected", title);
 		if (title == "退出") {
 			this.finish();
-		} else if (title == "舆情") {
+		}
+		if (title == "舆情") {
 			this.navigate_local(HOME_URL);
-		} else if (title == "设置") {
+		}
+		if (title == "设置") {
 			this.navigate_local("/setting.html");
+		}
+		if (title == "发送") {
+			this.navigate_remote("/admin/");
 		}
 
 		return true;

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent" >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="false"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dip" >
+
+            <LinearLayout
+                android:id="@+id/layout_first"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dip"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:paddingTop="10dip" >
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="地   址："
+                    android:textColor="#000000"
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/txt_address"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/txt_address"
+                    android:layout_weight="0.47"
+                    android:hint="服务器地址"
+                    tools:ignore="InefficientWeight,HardcodedText,ObsoleteLayoutParam" />
+
+                <requestFocus />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_top"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_first"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:paddingTop="10dip" >
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="帐   号："
+                    android:textColor="#000000"
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/txt_username"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/username"
+                    android:layout_weight="1"
+                    android:hint="输入帐号"
+                    tools:ignore="InefficientWeight,ObsoleteLayoutParam,HardcodedText" >
+
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_center"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_top"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:paddingTop="10dip" >
+
+                <TextView
+                    android:id="@+id/password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="密   码："
+                    android:textColor="#000000"
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/txt_password"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/password"
+                    android:layout_weight="1"
+                    android:hint="输入密码"
+                    android:password="true"
+                    tools:ignore="InefficientWeight,ObsoleteLayoutParam,HardcodedText,Deprecated" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_below="@id/layout_center"
+                android:background="#FFFFFF" />
+
+            <LinearLayout
+                android:id="@+id/layout_center_two"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_center"
+                android:orientation="horizontal"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip" >
+
+                <CheckBox
+                    android:id="@+id/checkBox_savePassword"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="保存密码"
+                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    tools:ignore="InefficientWeight,HardcodedText" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_below="@id/layout_center_two"
+                android:background="#FFFFFF" />
+
+            <LinearLayout
+                android:id="@+id/layout_center1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_center_two"
+                android:orientation="horizontal"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:paddingTop="10dip" >
+
+                <Button
+                    android:id="@+id/btn_login"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="登录"
+                    tools:ignore="HardcodedText" />
+
+                <Button
+                    android:id="@+id/btn_exit"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="退出"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>
