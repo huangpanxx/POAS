@@ -92,7 +92,7 @@ public class main {
 	{ 
 		Connection conn = connect_db();
 		Statement statement = conn.createStatement();
-		ResultSet rs = statement.executeQuery("select * from Document where field = '"+field+"'");
+		ResultSet rs = statement.executeQuery("select * from Document where field = '"+field+"' and date = curdate()");
 		while (rs.next())
 		{
 			int pk = rs.getInt("id");
@@ -224,7 +224,7 @@ public class main {
 		{
 			String value = tmp.value();
 			int lexical_id = 0;
-			ResultSet rs = statement.executeQuery("select id from Lex where value = '"+value+"'");
+			ResultSet rs = statement.executeQuery("select id from Lex where value = '"+value+"' and date = curdate()");
 			while (rs.next())
 				lexical_id = rs.getInt("id");
 			for (Integer pk:tmp.get_map().keySet())
