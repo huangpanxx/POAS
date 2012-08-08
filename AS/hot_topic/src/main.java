@@ -32,7 +32,7 @@ public class main {
 		HashSet<Lexical> word = new HashSet<Lexical>();
 		ArrayList<String> stop_word = new ArrayList<String>();
 		float a = (float) 0.8,b = (float) 0.2;
-		String[] fields = new String[]{"政务","军事"};
+		String[] fields = new String[]{"政治","军事"};
 		
 		//get data from files,ArrayList<Document>,set<Lexical> and stop_word
 		input_stop(stop_word);
