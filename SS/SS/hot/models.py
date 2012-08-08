@@ -19,6 +19,7 @@ class Doc(models.Model):
     length = models.IntegerField()
     size = models.IntegerField()
     source_type = models.CharField(max_length = 255)
+    title = models.CharField(max_length = 255)
     field = models.CharField(max_length = 255)
     date = models.DateField()
     
@@ -30,6 +31,14 @@ class Lex_Doc(models.Model):
     Doc = models.ForeignKey(Doc)
     times = models.IntegerField()
     first_pos = models.IntegerField()
+    weight = models.FloatField()
     date = models.DateField()
     class Meta:
         db_table = 'Lex_Doc'
+        
+class IDF(models.Model):
+    value = models.CharField(max_length = 255)
+    field = models.CharField(max_length = 255)
+    weight = models.FloatField()
+    class Meta:
+        db_table = 'IDF'

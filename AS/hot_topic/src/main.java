@@ -32,7 +32,7 @@ public class main {
 		HashSet<Lexical> word = new HashSet<Lexical>();
 		ArrayList<String> stop_word = new ArrayList<String>();
 		float a = (float) 0.8,b = (float) 0.2;
-		String[] fields = new String[]{"Olympic","economy","culture"};
+		String[] fields = new String[]{"政务","军事"};
 		
 		//get data from files,ArrayList<Document>,set<Lexical> and stop_word
 		input_stop(stop_word);
@@ -92,7 +92,7 @@ public class main {
 	{ 
 		Connection conn = connect_db();
 		Statement statement = conn.createStatement();
-		ResultSet rs = statement.executeQuery("select * from Document where field = '"+field+"' and date = now()");
+		ResultSet rs = statement.executeQuery("select * from Document where field = '"+field+"'");
 		while (rs.next())
 		{
 			int pk = rs.getInt("id");
@@ -185,7 +185,7 @@ public class main {
 			for (Lexical tmp:word)
 			{
 				float weight = (float) 0.0;
-				float weight_p = (float) (1.0 * tmp.get_pos(pk) / doc.get(i).get_size());
+				float weight_p = (float) (1.0 * doc.get(i).get_size() / (tmp.get_pos(pk) + 1.0));
 				if (tmp.get_times(pk) != -1)
 				{ 
 					weight = (float) (a * (1 + Logarithm.log(tmp.get_times(pk), 2) * Logarithm.log(doc.size() / tmp.show_times(), 2) * tmp.get_part()) / doc_len + b * (tmp.length() / avg_len) * weight_p);
@@ -216,7 +216,7 @@ public class main {
 			String part_of_speech = tmp.part();
 			float weight = tmp.total_weight();
 			
-			statement.executeUpdate("insert into Lex (value,length,part_of_speech,field,total_weight,date) values ('"+value+"','"+length+"','"+part_of_speech+"','"+field+"','"+weight+"',now())");
+			statement.executeUpdate("insert into Lex (value,length,part_of_speech,field,total_weight,date) values ('"+value+"','"+length+"','"+part_of_speech+"','"+field+"','"+weight+"',curdate())");
 		}
 		
 		//write to Lex_Doc
@@ -231,9 +231,20 @@ public class main {
 			{
 				int times = tmp.get_times(pk);
 				int first_pos = tmp.get_pos(pk);
+				float weight = tmp.get_weight(pk);
 				
-				statement.executeUpdate("insert into Lex_Doc (Lex_id,Doc_id,times,first_pos,date) values ('"+lexical_id+"','"+pk+"','"+times+"','"+first_pos+"',now())");
+				statement.executeUpdate("insert into Lex_Doc (Lex_id,Doc_id,weight,times,first_pos,date) values ('"+lexical_id+"','"+pk+"','"+weight+"','"+times+"','"+first_pos+"',curdate())");
 			}
+		}
+		
+		//write to IDF
+		int doc_size = doc.size();
+		for (Lexical tmp:word)
+		{
+			String value = tmp.value();
+			double weight = tmp.show_times() * 1.0 / doc_size;
+			
+			statement.executeUpdate("insert into IDF (value,weight,field) values ('"+value+"','"+weight+"','"+field+"')");
 		}
 	}
 	

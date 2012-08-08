@@ -65,6 +65,14 @@ public class Lexical
 		m_weight.put(pk, wt);
 	}
 	
+	public float get_weight(int pk)
+	{
+		if (m_weight != null&&m_weight.containsKey(pk))
+			return m_weight.get(pk);
+		else
+			return -1;
+	}
+	
 	public float total_weight()
 	{
 		float max = (float) 0.0;
