@@ -1,4 +1,5 @@
 # Create your views here.
+# -*- coding: utf-8 -*-
 from hot.models import Lexical,Lex_Doc,Doc
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.context import Context, RequestContext
@@ -20,15 +21,9 @@ def hot(request,word_size = 10):
                               context_instance=RequestContext(request))
     
 def hot_detail(request,word_id):
-    news = Lex_Doc.objects.filter(Lex_id = word_id).filter(field = "新闻").order_by("-weight")
-    if news.size() > 10:
-        news = news[:10]
-    blog = Lex_Doc.objects.filter(Lex_id = word_id).filter(field = "博客").order_by("-weight")
-    if blog.size() > 10:
-        blog = blog[:10]
-    bbs = Lex_Doc.objects.filter(Lex_id = word_id).filter(field = "论坛").order_by("-weight")
-    if bbs.count() > 10:
-        bbs = bbs[:10]
+    news = Lex_Doc.objects.raw("select Document.* from Lex_Doc,Document where Document.id = Lex_Doc.Lex_id and Document.field = '新闻' and Lex_Doc.Lex_id = %s group by Lex_Doc.weight limit 10",word_id)
+    blog = Lex_Doc.objects.raw("select Document.* from Lex_Doc,Document where Document.id = Lex_Doc.Lex_id and Document.field = '博客' and Lex_Doc.Lex_id = %s group by Lex_Doc.weight linit 10",word_id)
+    bbs = Lex_Doc.objects.raw("select Document.* from Lex_Doc,Document where Document.id = Lex_Doc.Lex_id and Document.field = '论坛' and Lex_Doc.Lex_id = %s group by Lex_Doc.weight limit 10",word_id)
     return render_to_response('hot/hot_detail.html',
                               {'news':news,
                                'blog':blog,
