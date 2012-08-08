@@ -13,7 +13,7 @@ def login_view(request):
     if user is not None:
         logout(request) 
         login(request, user)
-        return HttpResponse('ok')
+        return HttpResponse('success')
     else:
-        return HttpResponse('错误')
+        return HttpResponse('failed')
 

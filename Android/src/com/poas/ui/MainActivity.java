@@ -25,6 +25,7 @@ public class MainActivity extends Activity {
 	final String LOCAL_BASE = "file:///android_asset";
 	final String HOME_URL = "/dossier/index.html";
 	final String LOGIN_URL = "/dossier/index.html";
+	final String HELP_URL = "/help.html";
 
 	WebView _webView = null;
 	WebClient _webClient = null;
@@ -116,6 +117,9 @@ public class MainActivity extends Activity {
 		}
 		if (title == "发送") {
 			this.navigate_remote("/admin/");
+		}
+		if (title == "帮助") {
+			this.navigate_local(HELP_URL);
 		}
 
 		return true;

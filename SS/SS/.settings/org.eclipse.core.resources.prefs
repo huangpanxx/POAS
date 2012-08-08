@@ -6,4 +6,5 @@ encoding//csmodel/models.py=utf8
 encoding//grappelli/settings.py=utf-8
 encoding//grappelli/urls.py=utf-8
 encoding//hot/__init__.py=utf8
+encoding//hot/views.py=utf-8
 encoding//personal/__init__.py=utf8

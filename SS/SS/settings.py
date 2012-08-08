@@ -150,6 +150,7 @@ INSTALLED_APPS = (
     'SS.hot',
     'SS.personal',
     'SS.csmodel',
+    'SS.wap',
 )
 
 # A sample logging configuration. The only tangible logging
