@@ -1,4 +1,5 @@
 package com.poas.ui;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -15,7 +16,18 @@ public class Settings {
 	String _fileName = null;
 	HashMap<String, String> _map = null;
 
-	public Settings(Application app, String fileName) {
+	private static Settings _instance = null;
+	private final static String SETTING_FILE = "settings.ini";
+
+	public static Settings instance(Application app) {
+		if (null == _instance) {
+			_instance = new Settings(app, SETTING_FILE);
+		}
+		return _instance;
+
+	}
+
+	private Settings(Application app, String fileName) {
 		this._app = app;
 		this._fileName = fileName;
 		this._map = this.loadSettings();
