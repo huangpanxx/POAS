@@ -26,7 +26,7 @@ DATABASES = {
         'NAME': 'hot', # Or path to database file if using sqlite3.
         'USER': 'poas', # Not used with sqlite3.
         'PASSWORD': 'poas', # Not used with sqlite3.
-        'HOST': '10.250.62.6', # Set to empty string for localhost. Not used with sqlite3.        'PORT': '', # Set to empty string for default. Not used with sqlite3.
+        'HOST': '192.168.1.110', # Set to empty string for localhost. Not used with sqlite3.        'PORT': '', # Set to empty string for default. Not used with sqlite3.
 		'PORT': '3306'
     },
     'cs':{
@@ -34,7 +34,7 @@ DATABASES = {
         'NAME': 'csmodel', # Or path to database file if using sqlite3.
         'USER': 'poas', # Not used with sqlite3.
         'PASSWORD': 'poas', # Not used with sqlite3.
-        'HOST': '10.250.62.6', # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': '192.168.1.110', # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306', # Set to empty string for default. Not used with sqlite3.
     },
 }
@@ -138,7 +138,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
+    #'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:

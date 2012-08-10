@@ -7,7 +7,7 @@ from django.shortcuts import render_to_response
 import time
 from function import rank
 
-def hot(request):
+def compute(request):
     local_date = time.strftime('%Y-%m-%d',time.localtime(time.time()))
     field1 = request.POST.get('field', '')
     type = request.POST.get('type', '')
@@ -25,12 +25,15 @@ def hot(request):
     count = []
     while i < 10:
         count.append(i)
+    return {
+            'words':words,
+            'fields':fields,
+            'delta':delta,
+            'count':count
+            }
+def hot(request):
     return render_to_response('hot/hot.html',
-                              {'words':words,
-                               'fields':fields,
-                               'delta':delta,
-                               'count':count
-                               },
+                              compute(request),
                               context_instance=RequestContext(request))
     
 def hot_detail(request,word_id):
