@@ -39,3 +39,7 @@ def source_view(request):
     return HttpResponse('Not impliment')
 
 
+def home_view(request):
+    return HttpResponse('Not impliment')
+
+

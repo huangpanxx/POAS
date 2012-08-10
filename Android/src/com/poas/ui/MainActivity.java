@@ -42,9 +42,13 @@ public class MainActivity extends Activity {
 	}
 
 	final String LOCAL_BASE = "file:///android_asset";
-	final String HOME_URL = "/dossier/index.html";
-	final String LOGIN_URL = "/dossier/index.html";
-	final String HELP_URL = "/help.html";
+
+	final String HOME_URL = "/wap/";
+	final String HELP_URL = "/wap/help/";
+	final String TRANSPORT_URL = "/wap/transport/";
+	final String TOPIC_URL = "/wap/topic/";
+	final String SOURCE_URL = "/wap/source/";
+	final String HOT_URL = "/wap/hot/";
 
 	WebView _webView = null;
 	WebClient _webClient = null;
@@ -93,9 +97,10 @@ public class MainActivity extends Activity {
 				cookie);
 		syncManager.sync();
 		// 加载主页
-		navigate_local(LOGIN_URL);
+		navigate_remote(HOME_URL);
 	}
 
+	@SuppressWarnings("unused")
 	private void navigate_local(String url) {
 		this._webView.loadUrl(LOCAL_BASE + url);
 	}
@@ -124,34 +129,42 @@ public class MainActivity extends Activity {
 		if (title == "退出") {
 			this.finish();
 		}
-		if (title == "舆情") {
-			this.navigate_local(HOME_URL);
+
+		if (title == "热点") {
+			this.navigate_remote(this.HOT_URL);
 		}
-		if (title == "设置") {
-			this.navigate_local("/setting.html");
+
+		if (title == "传播") {
+			this.navigate_remote(this.TRANSPORT_URL);
 		}
-		if (title == "发送") {
-			this.navigate_remote("/admin/");
+
+		if (title == "专题") {
+			this.navigate_remote(this.TOPIC_URL);
+		}
+
+		if (title == "来源") {
+			this.navigate_remote(this.SOURCE_URL);
+
 		}
 		if (title == "帮助") {
-			this.navigate_local(HELP_URL);
+			this.navigate_remote(this.HELP_URL);
 		}
 
 		return true;
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(Menu.NONE, Menu.FIRST, 1, "舆情").setIcon(
+	public boolean onCreateOptionsMenu(Menu menu) { 
+		menu.add(Menu.NONE, Menu.FIRST, 1, "热点").setIcon(
 				android.R.drawable.ic_menu_delete);
-		menu.add(Menu.NONE, Menu.FIRST, 2, "设置").setIcon(
+		menu.add(Menu.NONE, Menu.FIRST, 2, "传播").setIcon(
 				android.R.drawable.ic_menu_edit);
-		menu.add(Menu.NONE, Menu.FIRST, 3, "帮助").setIcon(
-				android.R.drawable.ic_menu_help);
-		menu.add(Menu.NONE, Menu.FIRST, 4, "添加").setIcon(
+		menu.add(Menu.NONE, Menu.FIRST, 3, "专题").setIcon(
 				android.R.drawable.ic_menu_add);
-		menu.add(Menu.NONE, Menu.FIRST, 5, "发送").setIcon(
-				android.R.drawable.ic_menu_send);
+		menu.add(Menu.NONE, Menu.FIRST, 4, "来源").setIcon(
+				android.R.drawable.ic_menu_add);
+		menu.add(Menu.NONE, Menu.FIRST, 5, "帮助").setIcon(
+				android.R.drawable.ic_menu_help);
 		menu.add(Menu.NONE, Menu.FIRST, 6, "退出").setIcon(
 				android.R.drawable.ic_menu_close_clear_cancel);
 		return true;
