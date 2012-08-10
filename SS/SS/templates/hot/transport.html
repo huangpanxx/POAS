@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+# -*- coding: utf-8 -*-
+
+{% block title %}Hot Topic{% endblock %}
+
+{% block content %}
+
+<table class="stats" data-chart="line">
+	
+	<caption>Transport Analysis(Reported Amount)</caption>
+
+	<thead>
+		<tr>
+			<td> </td>
+			{% for date in dates %}
+			<th>{{date}}</th>
+			{% endfor %}
+		</tr>
+	</thead>
+	
+	<tbody>
+		<tr>
+			{% for website in websites %}
+				<th>{{website}}</th>
+                                  {% ifequal website '网易'%}
+					{% for result in results %}
+						<td>{{result.网易}}</td>
+					{% endfor %}
+				  {% endifequal%}
+			{%endfor%}
+		</tr>	
+	
+	</tbody>
+	
+</table>
+{% endblock %}

@@ -5,4 +5,5 @@ from . import views
 urls = patterns('',
                 url(r'^$',views.hot),
                 url(r'^(?P<word_id>\d+)/$',views.hot_detail),
+                url(r'^\d+/transport.html?$',views.transport),
                 )

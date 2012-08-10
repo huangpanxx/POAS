@@ -45,3 +45,8 @@ class IDF(models.Model):
     weight = models.FloatField()
     class Meta:
         db_table = 'IDF'
+
+class Date(models.Model):
+    date = models.DateField()
+    class Meta:
+        db_table = 'Date'
