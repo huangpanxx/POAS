@@ -50,3 +50,8 @@ class Date(models.Model):
     date = models.DateField()
     class Meta:
         db_table = 'Date'
+        
+class Field(models.Model):
+    field = models.CharField(max_length = 255)
+    class Meta:
+        db_table = 'Field'
