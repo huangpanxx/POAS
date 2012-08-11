@@ -7,6 +7,7 @@ import personal
 from django.contrib import admin
 from django.http import HttpResponseRedirect
 import wap
+import notifications
 
 admin.autodiscover()
 
@@ -27,5 +28,6 @@ urlpatterns = patterns('',
     url(r'^personal/', include(personal.urls)),
     url(r'^hot/', include(hot.urls)),
     url(r'^wap/', include(wap.urls)),
+    url(r'^notification/', include(notifications.urls.urlpatterns)),
     
 ) 
