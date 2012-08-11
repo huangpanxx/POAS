@@ -8,23 +8,23 @@ import time
 from function import rank
 
 def compute(request):
-    local_date = time.strftime('%Y-%m-%d',time.localtime(time.time()))
     field1 = request.POST.get('field', '')
     type = request.POST.get('type', '')
-    fields = Doc.objects.raw("select * from field")
+    fields = Field.objects.raw("select * from field")
     if type == "今日":
         words = Lexical.objects.raw("select * from Lex where field = %s and date = curdate() group by total_weight desc limit 10",[field1])
         words_y = Lexical.objects.raw("select * from Lex where field = %s and datediff(curdate(),date) = 1 group by total_weight desc limit 10",[field1])
-        delta = rank(words.words_y)
+        delta = rank(words,words_y)
 #    words = Lexical.objects.filter(field = field1).filter(date = u‘2012-8-1’).order_by("-total_weight")[:word_size]
     else:
         words = Lexical.objects.raw("select *,sum(total_weight) as sum from lex where datediff(curdate(),date) <= 6 and field = %s group by value order by sum desc limit 10;",[field1] )
         words_y = words = Lexical.objects.raw("select *,sum(total_weight) as sum from lex where datediff(curdate(),date) > 6 and datediff(curdate(),date) <= 13 and field = %s group by value order by sum desc limit 10;",[field1] )
-        delta = rank(words.words_y)
+        delta = rank(words,words_y)
     i = 0
     count = []
     while i < 10:
         count.append(i)
+        i += 1
     return {
             'words':words,
             'fields':fields,
@@ -33,7 +33,7 @@ def compute(request):
             }
 def hot(request):
     return render_to_response('hot/hot.html',
-                              compute(request),
+                            compute(request),
                               context_instance=RequestContext(request))
     
 def hot_detail(request,word_id):
