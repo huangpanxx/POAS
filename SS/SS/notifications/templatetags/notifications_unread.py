@@ -30,6 +30,14 @@ class InboxCountNode(Node):
 			return '0'
 		return str(count)
 	
+@register.filter
+def notification_short(value,arg):
+	l = int(arg)
+	if len(value) > l:
+		value = value[0:l]+'...'
+	return value
+	
+
 @register.tag(name='notifications_unread')
 def notifications_unread(parser, token):
 	"""

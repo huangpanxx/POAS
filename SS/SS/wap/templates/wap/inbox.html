@@ -2,43 +2,36 @@
 {% block content %}
 
 {% load i18n notifications_unread %}
-
-<h3 class="header">站内信 (未读:{% notifications_unread %})   
-</h3>
+<h2 class="header">
+	<font color="white"> 站内信 (未读：{% notifications_unread %}) </font>
+</h2>
 
 <div class="activities">
+	<style>
+		h4,h5,h6		{ color: #111; margin-bottom: .75em; }
+
+		h1 				{ font-size: 30px; line-height: 1em; }
+		h2 				{ font-size: 24px; font-weight: normal; color: #222; margin-bottom: 1em }
+		h3 				{ font-size: 16px; color: #333; line-height: 1; margin-bottom: .75em }
+		h4 				{ font-size: 14px; color: #666; line-height: 1.25; margin-bottom: 1.25em }
+		h5 				{ font-size: 12px; font-weight: bold; margin-bottom: 1.5em }
+		h6 				{ font-size: 11px; font-weight: bold }
+	</style>
 	{% for action in action_list %}
-	{# display action only when action_object exists #}
-	{% if action.action_object %}
-	<div class="accordion_container" style="min-height:100px;">
+	<div class="" style="min-height:20px;">
 		<div class="body">
-			<h2 class="accordion_panel active">
-				<i class="{% if action.readed %}icon-mail{% else %}icon-mail-alt{% endif %}"></i>
+			<h4 text-align="right">
+				{{ action.actor }} 发送于 {{action.timesince}}之前
+				</br>
+				<i class="{% if action.readed %}icon-mail{% else %}icon-mail-alt{% endif %}"> </i>
 
-				<h3>
-					{% if action.actor.get_absolute_url %}
-					{{ action.actor }}
-					{% endif %}
-					{{ action.verb }}
-					{{ action.target }}
-				</h3>
-
-				<div class="accordion_content" style="display: block; "> 
-					{% if action.description %}
-					<div class="message">
-						<p>
-						{{ action.description }}
-						</p>
-					</div>
-					{% endif %}
-				</div>
-			</div>
+					{{ action.description|linebreaksbr|notification_short:"20"}}
+			</h4>
 		</div>
-		{% endif %}
-		{% empty %}
-		无信息.
-		{% endfor %}
 	</div>
+	{% endfor %}
+</div>
+
 <a class="btn-icon btn-grey btn-comment" href="../read_all">标记所有为已读</a>
-	{% endblock %}
+{% endblock %}
 
