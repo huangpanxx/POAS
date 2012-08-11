@@ -1,14 +1,22 @@
+{% load i18n notifications_unread %}
+
 <div id="top" >
 <div class="content_pad">
 	<ul class="right">
 		{% if user.is_authenticated %}
-		<li><a href="javascript:;" class="top_icon"><span class="ui-icon ui-icon-person"></span>Logged in as {{user}}</a></li>
-		<li><a href="javascript:;" class="new_messages top_alert">1 New Message</a></li>
-		<li><a href="/static/pages/settings.html">Settings</a></li>
-		<li><a href="/static/index.html">Logout</a></li>
+		<li><a href="/" class="top_icon"><span class="ui-icon ui-icon-person"></span>欢迎 {{user}} 登录</a></li>
+		<li><a href="/inbox/" class="new_messages top_alert">站内信 (未读:{% notifications_unread %}) </a></li>
+		<li><a href="/admin/super/password_change/">设置</a></li> 
+		<li><a href="/">分析</a></li>
+		<li><a href="/admin/">后台</a></li>
+		<li><a href="/admin/cs/">抓取</a></li>
+		<li><a href="/admin/super/logout/">注销</a></li>
+					
+				</li>
 		{% else %}
-		<li><a href="javascript:;" class="top_icon"><span class="ui-icon ui-icon-person"></span>You haven't logged in</a></li>
+		<li><a href="javascript:;" class="top_icon"><span class="ui-icon ui-icon-person"></span>请登录</a></li>
 	{% endif %} 
 	</ul>
 </div>
 </div>
+
