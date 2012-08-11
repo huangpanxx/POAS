@@ -17,7 +17,7 @@ def rank(words,words_y):
             if rank1[word.value] < rank_y[word.value]:
                 delta.append(1)
             elif rank1[word.value] > rank_y[word.value]:
-                delta.append[-1]
+                delta.append(-1)
             else:
-                delta.append[0]
+                delta.append(0)
     return delta
