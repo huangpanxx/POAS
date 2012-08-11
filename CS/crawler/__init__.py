@@ -7,10 +7,10 @@ import StringIO
 setup_environ(settings)
 #同步数据库
 import sys
-try:
-    stdout = sys.stdout
-    sys.stdout = StringIO.StringIO() #静默同步
-    from django.core.management import execute_manager
-    execute_manager(settings,[__file__,'syncdb'])
-finally:
-    sys.stdout = stdout
+#try:
+    #stdout = sys.stdout
+    #sys.stdout = StringIO.StringIO() #静默同步
+    #from django.core.management import execute_manager
+    #execute_manager(settings,[__file__,'syncdb'])
+#finally:
+#    sys.stdout = stdout

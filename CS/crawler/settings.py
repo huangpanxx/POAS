@@ -27,7 +27,7 @@ DATABASES = {
         'NAME': 'csmodel', # Or path to database file if using sqlite3.
         'USER': 'poas', # Not used with sqlite3.
         'PASSWORD': 'poas', # Not used with sqlite3.
-        'HOST': '10.250.62.6', # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': '192.168.50.205', # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306', # Set to empty string for default. Not used with sqlite3.
     },
 }

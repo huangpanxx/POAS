@@ -10,7 +10,9 @@
             <li class="user-options-container collapse closed">
                 <a href="javascript://" class="user-options-handler collapse-handler">{% firstof user.first_name user.username %}</a>
                 <ul class="user-options">
-                    <!-- Change Password -->
+										<li><a href="/">{% trans 'Home' %}</a>
+                                
+    											<!-- Change Password -->
                     {% url admin:password_change as password_change_url %}
                     {% if password_change_url %}
                         <li><a href="{{ password_change_url }}">
@@ -26,7 +28,7 @@
                         <li><a href="{{ root_path }}logout/">
                     {% endif %}
                     {% trans 'Log out' %}</a></li>
-                </ul>
+											</ul>
             </li>
             <!-- Userlinks -->
             {% block userlinks %}
