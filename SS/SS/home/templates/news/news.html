@@ -24,33 +24,23 @@
 					<tbody>
 						<tr class="odd gradeX">
 							<td>新闻</td>
-							<td>9</td>
-							<td>9</td>
-							<td class="center">9</td>
-							<td class="center">9</td>
+							{% for new in news %}
+							<td>{{new}}</td>
+							{% endfor %}
 						</tr>
 						<tr class="even gradeC">
 							<td>博客</td>
-							<td>8</td>
-							<td>8</td>
-							<td class="center">8</td>
-							<td class="center">8</td>
+							{% for blog in blogs %}
+							<td>{{blog}}</td>
+							{% endfor %}
 						</tr>
 						<tr class="odd gradeA">
 							<td>论坛</td>
-							<td>6</td>
-							<td>6</td>
-							<td class="center">6</td>
-							<td class="center">6</td>
+							{% for b in bbs %}
+							<td>{{b}}</td>
+							{% endfor %}
 						</tr>
-						<tr class="even gradeA">
-							<td>负面</td>
-							<td>7</td>
-							<td>7</td>
-							<td class="center">7</td>
-							<td class="center">7</td>
-						</tr>
-						</tbody>
+					</tbody>
 					</table>
 					
 					<br /><br /><br />
@@ -67,62 +57,14 @@
 						</tr>
 					</thead>
 					<tbody>
+						{% for i in results %}
 						<tr class="odd gradeX">
-							<td>Trident</td>
-							
-							
-							<td class="center"> 4</td>
-							<td class="center">X</td>
+							<td><a href="{{i.url}}">{{i.title}}</a></td>
+							<td class="center">{{i.publish_datetime}}</td>
+							<td class="center">{{i.name}}</td>
 						</tr>
-						<tr class="even gradeC">
-							<td>Trident</td>
-							
-							<td class="center">5</td>
-							<td class="center">C</td>
-						</tr>
-						<tr class="odd gradeA">
-							<td>Trident</td>
-							
-							
-							<td class="center">5.5</td>
-							<td class="center">A</td>
-						</tr>
-						<tr class="even gradeA">
-							<td>Trident</td>
-							
-							
-							<td class="center">6</td>
-							<td class="center">A</td>
-						</tr>
-						<tr class="odd gradeA">
-							<td>Trident</td>
-							
-							
-							<td class="center">7</td>
-							<td class="center">A</td>
-						</tr>
-						<tr class="even gradeA">
-							<td>Trident</td>
-							
-							
-							<td class="center">6</td>
-							<td class="center">A</td>
-						</tr>
-						<tr class="gradeA">
-							<td>Gecko</td>
-							
-							<td class="center">1.7</td>
-							<td class="center">A</td>
-						</tr>
-						
-						<tr class="gradeA">
-							<td>Gecko</td>
-												
-							<td class="center">1.7</td>
-							<td class="center">A</td>
-						</tr>
-
-					</tbody>
+						{% endfor %}
+											</tbody>
 				</table>
 			
 		</div> <!-- .x12 -->

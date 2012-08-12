@@ -23,7 +23,7 @@ def classify(request):
 
 
 def news(request):
-    results = Item.objects.raw("select Item.title,item.url,item.publish_datetime,site.name from item,site,spider,classifyrule,tendency where item.classify_rule_id = classifyrule.id and spider.id = classifyrule.spider_id and spider.site_id = site.id and tendency.item_id = item.id and tendency.tendency_value < -10 order by item.publish_datetime desc limit 8;")
+    results = Item.objects.raw("select Item.id,Item.title,item.url,item.publish_datetime,site.name from item,site,spider,classifyrule,tendency where item.classify_rule_id = classifyrule.id and spider.id = classifyrule.spider_id and spider.site_id = site.id and tendency.item_id = item.id and tendency.tendency_value < -10 order by item.publish_datetime desc limit 8;")
 
     news = []
     new_1 = Doc.objects.raw("select *,count(*) as num from document where source = '新闻' and datediff('2012-8-10',date) = 0")
