@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from home.models import Item,Tendency,Classifyrule,Field,Sourcetype,Sunning,Gome,Alibaba,Vancl,Amazon,Tecent
+from csmodel.models import Item,ClassifyRule, Field, SourceType
+from home.models import Tendency, Sunning, Gome, Alibaba, Vancl, Amazon, Tecent
 from hot.models import Doc
 
 def render(html_path, request, dic_data):
@@ -16,10 +17,10 @@ def classify(request):
         news = Item.objects.raw("select item.id ,item.title,item.url,item.publish_datetime from item, ClassifyRule, Field, SourceType,Tendency where ClassifyRule.source_type_id=SourceType.id and ClassifyRule.field_id=Field.id and ClassifyRule.id=item.classify_rule_id and sourcetype.name = '新闻' and Tendency.item_id = item.id and tendency.tendency_value < -10 order by item.publish_datetime desc limit 6");
         blogs = Item.objects.raw("select item.id,item.title,item.url,item.publish_datetime from item, ClassifyRule, Field, SourceType,Tendency where ClassifyRule.source_type_id=SourceType.id and ClassifyRule.field_id=Field.id and ClassifyRule.id=item.classify_rule_id and sourcetype.name = '博客' and Tendency.item_id = item.id and tendency.tendency_value < -10 order by item.publish_datetime desc limit 6");
         bbs = Item.objects.raw("select item.id,item.title,item.url,item.publish_datetime from item, ClassifyRule, Field, SourceType,Tendency where ClassifyRule.source_type_id=SourceType.id and ClassifyRule.field_id=Field.id and ClassifyRule.id=item.classify_rule_id and sourcetype.name = '论坛' and Tendency.item_id = item.id and tendency.tendency_value < -10 order by item.publish_datetime desc limit 6");
-        return render('classify/classify.html', request, {'news':news,'blogs':blogs,'bbs':bbs})
+        return render('classify/classify.html', request, {'news':news, 'blogs':blogs, 'bbs':bbs})
     if c:
-        results = Item.objects.raw("select item.id,item.title,item.url ,item.publish_datetime from item, ClassifyRule, Field, SourceType,Tendency where ClassifyRule.source_type_id=SourceType.id and ClassifyRule.field_id=Field.id and ClassifyRule.id=item.classify_rule_id and sourcetype.name = %s and Tendency.item_id = item.id and tendency.tendency_value < -10 order by item.publish_datetime desc limit 25",[c]);
-        return render('classify/more.html', request, {'results':results,'c':c})
+        results = Item.objects.raw("select item.id,item.title,item.url ,item.publish_datetime from item, ClassifyRule, Field, SourceType,Tendency where ClassifyRule.source_type_id=SourceType.id and ClassifyRule.field_id=Field.id and ClassifyRule.id=item.classify_rule_id and sourcetype.name = %s and Tendency.item_id = item.id and tendency.tendency_value < -10 order by item.publish_datetime desc limit 25", [c]);
+        return render('classify/more.html', request, {'results':results, 'c':c})
 
 
 def news(request):
@@ -67,15 +68,15 @@ def news(request):
     for bb in bbs_4:
         bbs.append(bb.num)
         
-    return render('news/news.html',request,{'results':results,'news':news,'bbs':bbs,'blogs':blogs})
+    return render('news/news.html', request, {'results':results, 'news':news, 'bbs':bbs, 'blogs':blogs})
 
 def competitor(request):
-    results_sunning = Sunning.objects.raw("select item.title,sunning.id ,item.url from item,sunning where sunning.item_id = item.id limit 5;")
-    results_gome = Gome.objects.raw("select item.title,gome.id ,item.url from item,gome where gome.item_id = item.id limit 5;")
-    results_alibaba = Alibaba.objects.raw("select item.title,alibaba.id ,item.url from item,alibaba where alibaba.item_id = item.id limit 5;")
-    results_amazon = Amazon.objects.raw("select item.title,amazon.id ,item.url from item,amazon where amazon.item_id = item.id limit 5;")
-    results_vancl = Vancl.objects.raw("select item.title,vancl.id ,item.url from item,vancl where vancl.item_id = item.id limit 5;")
-    results_tecent = Tecent.objects.raw("select item.title,tecent.id ,item.url from item,tecent where tecent.item_id = item.id limit 5;")
+    results_sunning = Sunning.objects.raw("select item.publish_datetime,item.title,sunning.id ,item.url from item,sunning where sunning.item_id = item.id limit 5;")
+    results_gome = Gome.objects.raw("select  item.publish_datetime,item.title,gome.id ,item.url from item,gome where gome.item_id = item.id limit 5;")
+    results_alibaba = Alibaba.objects.raw("select  item.publish_datetime,item.title,alibaba.id ,item.url from item,alibaba where alibaba.item_id = item.id limit 5;")
+    results_amazon = Amazon.objects.raw("select  item.publish_datetime,item.title,amazon.id ,item.url from item,amazon where amazon.item_id = item.id limit 5;")
+    results_vancl = Vancl.objects.raw("select  item.publish_datetime,item.title,vancl.id ,item.url from item,vancl where vancl.item_id = item.id limit 5;")
+    results_tecent = Tecent.objects.raw("select  item.publish_datetime,item.title,tecent.id ,item.url from item,tecent where tecent.item_id = item.id limit 5;")
     return render('competitor/competitor.html', request, {'results_sunning':results_sunning,
                                                           'results_gome':results_gome,
                                                           'results_alibaba':results_alibaba,

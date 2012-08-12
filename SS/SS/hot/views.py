@@ -8,8 +8,8 @@ import time
 from function import rank
 
 def compute(request):
-    field1 = request.POST.get('field', '')
-    type = request.POST.get('type', '')
+    field1 = request.POST.get('field', 'IT')
+    type = request.POST.get('type', 'today')
     fields = Field.objects.raw("select * from field")
     if type == 'today':
         words = Lexical.objects.raw("select * from Lex where field = %s and datediff('2012-8-10',date) = 0 group by total_weight desc limit 10",[field1])

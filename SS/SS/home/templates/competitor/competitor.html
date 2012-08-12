@@ -21,13 +21,9 @@
 				<p>重点监控新浪，网易，凤凰等主流新闻媒体.</p>
 				
 				<ul>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-		
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-		
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
+					{% for i in results_sunning %} 
+					<li><strong><a href="{{i.url}}">{{i.publish_datetime}}:{{i.title}}</a></strong></li>
+					{% endfor %}
 				</ul>
 				</div>
 			</div></td>
@@ -42,13 +38,10 @@
 				<p>重点监控网易，新浪等主流博客，获取最新舆情.</p>
 				
 				<ul>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-		
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-		
+						{% for i in results_gome%} 
+					<li><strong><a href="{{i.url}}">{{i.publish_datetime}}:{{i.title}}</a></strong></li>
+					{% endfor %}
+
 				</ul>
 				</div>
 			</div></td>
@@ -62,13 +55,9 @@
 				<p>重点监控百度帖，京东商城官方论坛等主流论坛.</p>
 				
 				<ul>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-		
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-		
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
+						{% for i in results_alibaba%} 
+					<li><strong><a href="{{i.url}}">{{i.publish_datetime}}:{{i.title}}</a></strong></li>
+					{% endfor %}
 				</ul>
 				</div>
 			</div></td>
@@ -86,13 +75,11 @@
 				<p>重点监控新浪，网易，凤凰等主流新闻媒体.</p>
 				
 				<ul>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-		
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-		
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
+
+			{% for i in results_amazon%} 
+					<li><strong><a href="{{i.url}}">{{i.publish_datetime}}:{{i.title}}</a></strong></li>
+					{% endfor %}
+				
 				</ul>
 				</div>
 			</div></td>
@@ -107,12 +94,11 @@
 				<p>重点监控网易，新浪等主流博客，获取最新舆情.</p>
 				
 				<ul>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-		
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
+
+			{% for i in results_tecent%} 
+					<li><strong><a href="{{i.url}}">{{i.publish_datetime}}:{{i.title}}</a></strong></li>
+					{% endfor %}
+				
 		
 				</ul>
 				</div>
@@ -127,13 +113,13 @@
 				<p>重点监控百度帖，京东商城官方论坛等主流论坛.</p>
 				
 				<ul>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
+
+
+		{% for i in results_vancl%} 
+					<li><strong><a href="{{i.url}}">{{i.publish_datetime}}:{{i.title}}</a></strong></li>
+					{% endfor %}
+				
 		
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
-		
-					<li><strong><a href="www.baidu.com">京东骗人的狗东西</a></strong></li>
 				</ul>
 				</div>
 			</div></td>
