@@ -3,6 +3,7 @@ from home import views
 from django.http import HttpResponseRedirect
 
 urls = patterns('',
-                url(r'^$',lambda x:HttpResponseRedirect('/classify/')),
+                url(r'^$',lambda x:HttpResponseRedirect('/news/')),
+                url(r'^news/$',views.news),
                 url(r'^classify/$',views.classify),
                 )

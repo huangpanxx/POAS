@@ -15,3 +15,7 @@ def classify(request):
         return render('classify/classify.html', request, {})
 
 
+def news(request):
+    return render('news/news.html', request, {})
+
+
