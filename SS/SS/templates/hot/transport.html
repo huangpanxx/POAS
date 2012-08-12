@@ -1,9 +1,11 @@
-{% extends "base.html" %}
-# -*- coding: utf-8 -*-
+{% extends "hot/hot_base.html" %}
 
 {% block title %}Hot Topic{% endblock %}
+{% block grid_title %}传播分析{% endblock %}
 
-{% block content %}
+{% block grid_content %}
+<div id="content" class="xgrid">
+<div id="welcome" class="x12">
 <table class="stats" data-chart="line">
 	
 	<caption>传播分析(报道数量)</caption>
@@ -18,33 +20,30 @@
 	</thead>
 	
 	<tbody>
-		<tr>
-			{% for website in websites %}
-				<th>{{website}}</th>
-                                  {% ifequal website '网易'%}
-					{% for result in results %}
-						<td>{{result.网易}}</td>
+			{% for result in results%}
+			<tr>
+				<th>{{result.0}}</th>
+					{% for x in result.1 %}
+						<td>{{x}}</td>
 					{% endfor %}
-				  {% endifequal%}
-                                  {% ifequal website '凤凰网'%}
-					{% for result in results %}
-						<td>{{result.凤凰网}}</td>
-					{% endfor %}
-				  {% endifequal%}
-                                  {% ifequal website '扬子晚报网 '%}
-					{% for result in results %}
-						<td>{{result.扬子晚报网 }}</td>
-					{% endfor %}
-				  {% endifequal%}
-                                  {% ifequal website '中国广播网'%}
-					{% for result in results %}
-						<td>{{result.中国广播网 }}</td>
-					{% endfor %}
-				  {% endifequal%}
+			</tr>
 			{%endfor%}
-		</tr>	
 	
 	</tbody>
 	
 </table>
+</div>
+</div>
+
+<body>
+请选择需要分析的网站：<br>
+<form method = "post" accept-charset="utf-8">{% csrf_token %}
+{%for website in websites%}
+<input type="checkbox" name={{website}} value ={{website}} >{{website}}
+{%endfor%}
+
+<input align="right" class="btn-icon  btn-grey btn-comment" type="submit" value="分析">
+</form>
+</body>
+
 {% endblock %}

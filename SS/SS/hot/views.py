@@ -61,6 +61,11 @@ def transport(request):
     websites = []
     for website in tmp_websites:
         websites.append(website.website)
+    choose_web = []
+    for website in websites:
+        get_value = request.POST.get(website, '')
+        if get_value != "":
+            choose_web.append(request.POST.get(website, ''))
     dates = []
     date = 6
     tmp_date = Date.objects.raw("select * from date where datediff('2012-8-10',date) <= %s",[date])
@@ -69,18 +74,31 @@ def transport(request):
     results = []
     while date >= 0:
         tmp_res = {}
-        for website in websites:
+        for website in choose_web:
             tmp_res[website] = 0
         words = Lexical.objects.raw("select * from Lex where value = %s and datediff('2012-8-10',date) = %s",[value,date])
         for word in words:
             docs = Doc.objects.raw("select Document.id,Document.website,count(Document.website) as num from Document,Lex_Doc where Document.id = Lex_Doc.Doc_id and Lex_Doc.Lex_id = %s group by Document.website",[word.id])
             for doc in docs:
-                tmp_res[doc.website] += doc.num
+                if doc.website in choose_web:
+                    tmp_res[doc.website] += doc.num
         results.append(tmp_res)
-        date -= 1    
+        date -= 1  
+    p = []
+    for website in choose_web:
+        i = 0
+        r = []
+        q = []
+        while i < len(results):
+            q.append(results[i][website])
+            i += 1
+        r.append(website)
+        r.append(q)
+        p.append(r)
     return render_to_response('hot/transport.html',
-                              {'results':results,
+                              {'results':p,
                                'dates':dates,
-                               'websites':websites
+                               'websites':websites,
+                               'website':choose_web
                                },
                               context_instance=RequestContext(request))
