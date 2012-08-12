@@ -1,4 +1,49 @@
 {% extends "wap/base.html" %}
 {% block content %}
-hot
+<form action="" method="post" align="right" accept-charset="utf-8">{% csrf_token %}
+	<div class="dataTables_length">
+	领域:
+	<select name="field" size = "1">
+		{%for field in fields%}
+		<option value={{field.field}}>{{field.field}}</option>
+	        {%endfor%}
+	</select>
+	日期:
+	<select name="type" size = "1">
+		<option value="today">今日</option>
+		<option value="week">本周</option>
+	</select>
+	<input type="submit" value="查询" />
+	</div>
+
+</form>
+
+<div id="content" class="xgrid">
+		<div id="welcome" class="x12">			
+			<table class="data info_table">
+				<thead>
+		<tr>
+			<th>排名</th> 
+			<th>热点词</th>
+			<th>排名变动</th>   
+			<th>热度</th>             
+		</tr>
+	</thead>
+	
+	<tbody>
+               {% for result in results %}
+		<tr>
+			<td>{{result.0}}</td>
+			<td><a href="{{result.4}}/">{{result.1}}</a></td>
+			<td>{{result.2}}</td>
+			<td>{{result.3}}</td>
+		</tr>
+               {% endfor %}
+
+	</tbody>
+			</table>
+			
+		</div> <!-- .x4 -->
+			
+		
 {% endblock %}

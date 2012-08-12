@@ -13,3 +13,4 @@ encoding//notifications/urls.py=utf-8
 encoding//notifications/utils.py=utf-8
 encoding//personal/__init__.py=utf8
 encoding//wap/__init__.py=utf8
+encoding//wap/views.py=utf8

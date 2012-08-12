@@ -1,3 +1,4 @@
+#coding:utf8
 # Create your views here.
 from django.contrib.auth import authenticate, logout, login
 from django.http import HttpResponse, HttpResponseRedirect
@@ -5,6 +6,7 @@ from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
 from notifications.models import Notification
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from hot.views import compute
 
 def render(html_path, request, dic_data):
     return render_to_response(html_path, dic_data,
@@ -33,7 +35,9 @@ def transport_view(request):
 
 
 def hot_view(request):
-    return render('wap/hot.html', request, {})
+    field1 = request.POST.get('field', '')
+    type = request.POST.get('type', '')
+    return render('wap/hot.html', request, compute(request))
 
 
 def topic_view(request):
