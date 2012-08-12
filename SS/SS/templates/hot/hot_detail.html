@@ -2,7 +2,10 @@
 
 {% block  grid_content %}
 <a href="transport.html?value={{ value.value }}">传播分析</a>
-<table class="data datatable">
+
+<div id="welcome1" class="x12">
+新闻
+<table class="data ">
 	<thead>
 <tr>
 			<th>标题</th>     
@@ -22,5 +25,53 @@
 
 	</tbody>
 </table>
+</div>
 
+<div id="welcome" class="x12">
+博客
+<table class="data datatable">
+	<thead>
+<tr>
+			<th>标题</th>     
+			<th>网站</th>    
+			<th>日期</th>
+</tr>  
+	</thead>
+	<tbody>
+{% for one in blog %}
+		<tr>
+			<td><a href="{{one.url}}">{{one.title}}</a></td>
+			<td>{{one.website}}</td>
+			<td>{{one.date}}</td>
+		</tr>
+{%endfor%}
+
+
+	</tbody>
+</table>
+</div>
+
+<div id="welcome" class="x12">
+论坛
+<table class="data datatable">
+	<thead>
+<tr>
+			<th>标题</th>     
+			<th>网站</th>    
+			<th>日期</th>
+</tr>  
+	</thead>
+	<tbody>
+{% for one in bbs %}
+		<tr>
+			<td><a href="{{one.url}}">{{one.title}}</a></td>
+			<td>{{one.website}}</td>
+			<td>{{one.date}}</td>
+		</tr>
+{%endfor%}
+
+
+	</tbody>
+</table>
+</div>
 {% endblock %}
