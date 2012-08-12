@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from home.models import Item,Tendency,Classifyrule,Field,Sourcetype
+from home.models import Item,Tendency,Classifyrule,Field,Sourcetype,Sunning,Gome,Alibaba,Vancl,Amazon,Tecent
 from hot.models import Doc
 
 def render(html_path, request, dic_data):
@@ -70,6 +70,18 @@ def news(request):
     return render('news/news.html',request,{'results':results,'news':news,'bbs':bbs,'blogs':blogs})
 
 def competitor(request):
-    return render('competitor/competitor.html', request, {})
+    results_sunning = Sunning.objects.raw("select item.title,sunning.id ,item.url from item,sunning where sunning.item_id = item.id limit 5;")
+    results_gome = Gome.objects.raw("select item.title,gome.id ,item.url from item,gome where gome.item_id = item.id limit 5;")
+    results_alibaba = Alibaba.objects.raw("select item.title,alibaba.id ,item.url from item,alibaba where alibaba.item_id = item.id limit 5;")
+    results_amazon = Amazon.objects.raw("select item.title,amazon.id ,item.url from item,amazon where amazon.item_id = item.id limit 5;")
+    results_vancl = Vancl.objects.raw("select item.title,vancl.id ,item.url from item,vancl where vancl.item_id = item.id limit 5;")
+    results_tecent = Tecent.objects.raw("select item.title,tecent.id ,item.url from item,tecent where tecent.item_id = item.id limit 5;")
+    return render('competitor/competitor.html', request, {'results_sunning':results_sunning,
+                                                          'results_gome':results_gome,
+                                                          'results_alibaba':results_alibaba,
+                                                          'results_amazon':results_amazon,
+                                                          'results_vancl':results_vancl,
+                                                          'results_tecent':results_tecent,
+                                                          })
 
 
