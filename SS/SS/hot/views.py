@@ -18,10 +18,10 @@ def compute(request):
 #    words = Lexical.objects.filter(field = field1).filter(date = u‘2012-8-1’).order_by("-total_weight")[:word_size]
     else:
         words = Lexical.objects.raw("select *,sum(total_weight) as sum from lex where datediff('2012-8-10',date) <= 6 and field = %s group by value order by sum desc limit 10;",[field1] )
-        words_y = words = Lexical.objects.raw("select *,sum(total_weight) as sum from lex where datediff('2012-8-10',date) > 6 and datediff('2012-8-10',date) <= 13 and field = %s group by value order by sum desc limit 10;",[field1] )
-        delta = rank(words,words_y)        
+        words_y = Lexical.objects.raw("select *,sum(total_weight) as sum from lex where datediff('2012-8-10',date) > 6 and datediff('2012-8-10',date) <= 13 and field = %s group by value order by sum desc limit 10;",[field1] )
+        delta = rank(words,words_y)     
     
-    results = [[]]
+    results = []
     i = 0
     for word in words:
         tmp = []
@@ -34,8 +34,11 @@ def compute(request):
         i += 1
     return {
             'words':words,
+            'words_y':words_y,
             'fields':fields,
-            'results':results
+            'results':results,
+            'field':field1,
+            'type':type
             }
 def hot(request):
     return render_to_response('hot/hot.html',
