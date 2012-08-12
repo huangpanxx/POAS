@@ -1,13 +1,13 @@
-{% extends "base.html" %}
+{% extends "notifications/list_base.html" %}
 {% load i18n notifications_unread %}
 
 {% block head %}<title>站内信</title>{% endblock %}
 
 
-{% block content %}
+{% block grid_content %}
 
 <h2 class="header">
-	站内信 (未读：{% notifications_unread %})
+	未读：{% notifications_unread %}
 </h2>
 
 <div class="activities">

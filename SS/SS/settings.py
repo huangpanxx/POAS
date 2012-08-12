@@ -152,6 +152,7 @@ INSTALLED_APPS = (
     'SS.csmodel',
     'SS.wap',
     'SS.notifications',
+    'SS.home'
 )
 
 # A sample logging configuration. The only tangible logging

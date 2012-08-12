@@ -6,7 +6,9 @@ import personal
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 from django.http import HttpResponseRedirect
+
 import wap
+import home
 
 admin.autodiscover()
 
@@ -30,4 +32,5 @@ urlpatterns = patterns('',
     url(r'^hot/', include(hot.urls)),
     url(r'^wap/', include(wap.urls)),
     url(r'^inbox/', include('SS.notifications.urls')),
+    url(r'',include(home.urls))
 ) 
