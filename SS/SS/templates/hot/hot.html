@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Hot Topic{% endblock %}
+{% block title %}热点分析{% endblock %}
 
 {% block content %}
 <div id="header">
@@ -16,27 +16,28 @@
 			</ul>
 </div>
 </div>
-<form action="" method="post" accept-charset="utf-8">{% csrf_token %}
+<form action="" method="post" align="right" accept-charset="utf-8">{% csrf_token %}
 	<div class="dataTables_length">
-	Field:
+	领域:
 	<select name="field" size = "1">
 		{%for field in fields%}
 		<option value={{field.field}}>{{field.field}}</option>
 	        {%endfor%}
 	</select>
-	Date:
+	日期:
 	<select name="type" size = "1">
-		<option value="今日">Today</option>
-		<option value="本周">Week</option>
+		<option value="today">今日</option>
+		<option value="week">本周</option>
 	</select>
+	<input type="submit" value="查询" />
 	</div>
-<input type="submit" value="go" />
+
 </form>
 
-<div class="x9">
-<table class="data datatable">
-</input>
-	<thead>
+<div id="content" class="xgrid">
+		<div id="welcome" class="x12">			
+			<table class="data info_table">
+				<thead>
 		<tr>
 			<th>排名</th> 
 			<th>热点词</th>
@@ -46,49 +47,45 @@
 	</thead>
 	
 	<tbody>
-               {% for i in count %}
+               {% for result in results %}
 		<tr>
-			<td>{{i}}</td>
-			<td>{{word.i.value}}</td>
-			{% ifequal delta.i 1%}
-			<td>{{上升}}</td>
-			{% elifequal delta.i -1%}
-			<td>{{下降}}</td>
-			{% else %}
-			<td>{{不变}}</td>
-			{% endifequal%}
-			<td>{{word.i.total_weight}}</td>
+			<td>{{result.0}}</td>
+			<td><a href="{{result.4}}/">{{result.1}}</a></td>
+			<td>{{result.2}}</td>
+			<td>{{result.3}}</td>
 		</tr>
                {% endfor %}
 
 	</tbody>
-</table>
-</div>
-
-<div class="x3">
-<table class="stats" data-chart="bar">
+			</table>
+			
+		</div> <!-- .x4 -->
+			
+		<div class="x12">
+			<table class="stats" data-chart="bar">
 	
 	<caption>热度</caption>
 
 	<thead>
 		<tr>
-			<td> </td>
-			{% for word in words %}
+			{%for word in words%}
+
 			<th>{{word.value}}</th>
-			{% endfor %}
+			{% endfor%}
 		</tr>
 	</thead>
 	
 	<tbody>
 		<tr>
-			{% for word in words%}
+			<th>热度</th>
+			{%for word in words%}
 			<td>{{word.total_weight}}</td>
-			{% endfor %}
+			{%endfor%}
 		</tr>	
 	</tbody>
 	
 </table>
-
-</div>
+		</div> <!-- .x12 -->
+		
 
 {% endblock %}

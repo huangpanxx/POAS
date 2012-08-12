@@ -4,10 +4,9 @@
 {% block title %}Hot Topic{% endblock %}
 
 {% block content %}
-
 <table class="stats" data-chart="line">
 	
-	<caption>Transport Analysis(Reported Amount)</caption>
+	<caption>传播分析(报道数量)</caption>
 
 	<thead>
 		<tr>
@@ -25,6 +24,21 @@
                                   {% ifequal website '网易'%}
 					{% for result in results %}
 						<td>{{result.网易}}</td>
+					{% endfor %}
+				  {% endifequal%}
+                                  {% ifequal website '凤凰网'%}
+					{% for result in results %}
+						<td>{{result.凤凰网}}</td>
+					{% endfor %}
+				  {% endifequal%}
+                                  {% ifequal website '扬子晚报网 '%}
+					{% for result in results %}
+						<td>{{result.扬子晚报网 }}</td>
+					{% endfor %}
+				  {% endifequal%}
+                                  {% ifequal website '中国广播网'%}
+					{% for result in results %}
+						<td>{{result.中国广播网 }}</td>
 					{% endfor %}
 				  {% endifequal%}
 			{%endfor%}

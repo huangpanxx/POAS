@@ -11,25 +11,31 @@ def compute(request):
     field1 = request.POST.get('field', '')
     type = request.POST.get('type', '')
     fields = Field.objects.raw("select * from field")
-    if type == "今日":
-        words = Lexical.objects.raw("select * from Lex where field = %s and date = curdate() group by total_weight desc limit 10",[field1])
-        words_y = Lexical.objects.raw("select * from Lex where field = %s and datediff(curdate(),date) = 1 group by total_weight desc limit 10",[field1])
+    if type == 'today':
+        words = Lexical.objects.raw("select * from Lex where field = %s and datediff('2012-8-10',date) = 0 group by total_weight desc limit 10",[field1])
+        words_y = Lexical.objects.raw("select * from Lex where field = %s and datediff('2012-8-10',date) = 1 group by total_weight desc limit 10",[field1])
         delta = rank(words,words_y)
 #    words = Lexical.objects.filter(field = field1).filter(date = u‘2012-8-1’).order_by("-total_weight")[:word_size]
     else:
-        words = Lexical.objects.raw("select *,sum(total_weight) as sum from lex where datediff(curdate(),date) <= 6 and field = %s group by value order by sum desc limit 10;",[field1] )
-        words_y = words = Lexical.objects.raw("select *,sum(total_weight) as sum from lex where datediff(curdate(),date) > 6 and datediff(curdate(),date) <= 13 and field = %s group by value order by sum desc limit 10;",[field1] )
-        delta = rank(words,words_y)
+        words = Lexical.objects.raw("select *,sum(total_weight) as sum from lex where datediff('2012-8-10',date) <= 6 and field = %s group by value order by sum desc limit 10;",[field1] )
+        words_y = words = Lexical.objects.raw("select *,sum(total_weight) as sum from lex where datediff('2012-8-10',date) > 6 and datediff('2012-8-10',date) <= 13 and field = %s group by value order by sum desc limit 10;",[field1] )
+        delta = rank(words,words_y)        
+    
+    results = [[]]
     i = 0
-    count = []
-    while i < 10:
-        count.append(i)
+    for word in words:
+        tmp = []
+        tmp.append(i + 1)
+        tmp.append(word.value)
+        tmp.append(delta[i])
+        tmp.append(word.total_weight)
+        tmp.append(word.id)
+        results.append(tmp)
         i += 1
     return {
             'words':words,
             'fields':fields,
-            'delta':delta,
-            'count':count
+            'results':results
             }
 def hot(request):
     return render_to_response('hot/hot.html',
@@ -57,7 +63,7 @@ def transport(request):
         websites.append(website.website)
     dates = []
     date = 6
-    tmp_date = Date.objects.raw("select * from date where datediff(curdate(),date) <= %s",[date])
+    tmp_date = Date.objects.raw("select * from date where datediff('2012-8-10',date) <= %s",[date])
     for tmp in tmp_date:
         dates.append(tmp.date)
     results = []
@@ -65,7 +71,7 @@ def transport(request):
         tmp_res = {}
         for website in websites:
             tmp_res[website] = 0
-        words = Lexical.objects.raw("select * from Lex where value = %s and datediff(curdate(),date) = %s",[value,date])
+        words = Lexical.objects.raw("select * from Lex where value = %s and datediff('2012-8-10',date) = %s",[value,date])
         for word in words:
             docs = Doc.objects.raw("select Document.id,Document.website,count(Document.website) as num from Document,Lex_Doc where Document.id = Lex_Doc.Doc_id and Lex_Doc.Lex_id = %s group by Document.website",[word.id])
             for doc in docs:
