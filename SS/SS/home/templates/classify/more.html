@@ -1,0 +1,37 @@
+{% extends "classify/classify_base.html" %}
+{% block grid_content %}
+<div id="wrapper">
+	
+	<div id="content" class="xgrid">
+		
+		<div class="x12">
+			
+			<div class="apg-mini apg-mini-4">
+	
+			<div class="apg-option ">
+				
+				<div class="apg-header">
+		
+					<h1>{{c}}</h1>
+				</div>
+				
+				<div class="apg-content">
+				
+				<ul>
+		{% for n in results %}
+					<li><strong><a href="{{n.url}}">{{n.publish_datetime}}:{{n.title}}</a></strong></li>
+{% endfor %}				
+</ul>
+				</div>
+			</div>
+		
+			
+			
+		</div>		
+		</div> <!-- .x12 -->
+		
+	</div> <!-- #content -->	
+	
+</div> <!-- #wrapper -->
+
+{% endblock %}
