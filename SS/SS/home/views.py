@@ -69,3 +69,7 @@ def news(request):
         
     return render('news/news.html',request,{'results':results,'news':news,'bbs':bbs,'blogs':blogs})
 
+def competitor(request):
+    return render('competitor/competitor.html', request, {})
+
+

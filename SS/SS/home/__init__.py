@@ -6,4 +6,5 @@ urls = patterns('',
                 url(r'^$',lambda x:HttpResponseRedirect('/news/')),
                 url(r'^news/$',views.news),
                 url(r'^classify/$',views.classify),
+                url(r'^competitor/$',views.competitor),
                 )
