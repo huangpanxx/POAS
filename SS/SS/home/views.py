@@ -8,6 +8,10 @@ def render(html_path, request, dic_data):
 
 
 def classify(request):
-    return render('classify/classify.html', request,{})
+    c = request.GET.get('c', '')
+    if not c:
+        return render('classify/classify.html', request, {})
+    if c:
+        return render('classify/classify.html', request, {})
 
 

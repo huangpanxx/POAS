@@ -4,6 +4,5 @@ from django.http import HttpResponseRedirect
 
 urls = patterns('',
                 url(r'^$',lambda x:HttpResponseRedirect('/classify/')),
-                url(r'^classify/',views.classify)
-                
+                url(r'^classify/$',views.classify),
                 )
