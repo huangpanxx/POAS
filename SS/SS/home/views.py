@@ -19,3 +19,7 @@ def news(request):
     return render('news/news.html', request, {})
 
 
+def competitor(request):
+    return render('competitor/competitor.html', request, {})
+
+

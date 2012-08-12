@@ -1,95 +1,91 @@
 ﻿{% extends "classify/classify_base.html" %}
 {% block grid_content %}
-<div id="content" class="xgrid">
-	<div class="x12">
-		<div class="apg-mini apg-mini-4">
-			<div class="apg-option ">
+<div id="wrapper">
+	
+	<div id="content" class="xgrid">
+		
+		<div class="x12">
+			
+			<div class="apg-mini apg-mini-4">
+			<center>
+			<table>
+				<tr>
+				<td><div class="apg-option ">
+				
 				<div class="apg-header">
+		
 					<h1>新闻</h1>
 				</div>
+				
 				<div class="apg-content">
-					<p>重点监控新浪，网易，凤凰等主流新闻媒体.</p>
-					<ul>
+				<p>重点监控新浪，网易，凤凰等主流新闻媒体.</p>
+				
+				<ul>
 						{% for n in news %}
 						<li><strong><a href="{{n.url}}">{{n.publish_datetime}}:{{n.title}}</a></strong></li>
 						{% endfor %}
-					</ul>
+				</ul>
 				</div>
-
-
+				
+				
 				<div class="apg-footer">
-					<!--
+				<!--
 					<span class="apg-price">$35<span class="apg-label">/month</span></span>
-					-->
-					<a href="./?c=新闻" class="btn btn-small">更多...</a>
-				</div>
-			</div>
-
-			<div class="apg-option ">
-
+				-->
+				  <a href="javascript:;" class="btn btn-small">更多...</a>
+				 </div>
+			</div></td>
+				<td><div class="apg-option ">
+				
 				<div class="apg-header">
-					<h1>博客</h1>
-
+					<h1>博客</h1>	
 				</div>
-
+				
 				<div class="apg-content">
-
-					<p>重点监控网易，新浪等主流博客，获取最新舆情.</p>
-
-					<ul>
+		
+				<p>重点监控网易，新浪等主流博客，获取最新舆情.</p>
+				
+				<ul>
 						{% for n in blogs %}
-						<li>
-
 						<li><strong><a href="{{n.url}}">{{n.publish_datetime}}:{{n.title}}</a></strong></li>
-						</li>
 						{% endfor %}
-
-					</ul>
+		
+				</ul>
 				</div>
-
-
 				<div class="apg-footer">
 					<!--<span class="apg-price">$55<span class="apg-label">/month</span></span>
 					-->
-					<a href="./?c=博客"  class="btn btn-small">更多...</a>
-				</div>
-			</div>
-
-
-			<div class="apg-option ">
-
+				  <a href="javascript:;" class="btn btn-small">更多...</a>
+				 </div>
+			</div></td>
+				<td><div class="apg-option ">
+				
 				<div class="apg-header">
 					<h1>论坛</h1>
 				</div>
-
+				
 				<div class="apg-content">
-					<p>重点监控百度帖，京东商城官方论坛等主流论坛.</p>
-
-					<ul>
-
-
-						{% for n in bbs %}
-						<li>
-						<li><strong><a href="{{n.url}}">{{n.publish_datetime}}:{{n.title}}</a></strong></li>
-						</li>
+				<p>重点监控百度帖，京东商城官方论坛等主流论坛.</p>
+				
+				<ul>
+						{% for n in news %}
+						<li><strong><a href="{{n.bbs}}">{{n.publish_datetime}}:{{n.title}}</a></strong></li>
 						{% endfor %}
-
-					</ul>
+				</ul>
 				</div>
-
-
 				<div class="apg-footer">
 					<!-- <span class="apg-price">$75<span class="apg-label">/month</span></span>
 					-->
-					<a href="./?c=论坛" class="btn btn-small">更多...</a>
-				</div>
-			</div>
-
+				  <a href="javascript:;" class="btn btn-small">更多...</a>
+				 </div>
+			</div></td>
+				</tr>
+			</table>	
+			</center>
 		</div>		
-	</div> <!-- .x12 -->
-
-</div> <!-- #content -->	
-
+		</div> <!-- .x12 -->
+	</div> <!-- #content -->	
+</div> <!-- #wrapper -->
 
 {% endblock %}
 

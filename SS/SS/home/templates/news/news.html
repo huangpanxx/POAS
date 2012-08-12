@@ -1,8 +1,59 @@
 {% extends "news/news_base.html" %}
 
 {% block grid_content %}
-<div id="content" class="xgrid">
+<div id="wrapper">
+	
+
+	
+	<div id="content" class="xgrid">
 		
+		<div class="x12">
+			
+			<h2>统计信息</h2>
+				
+				<table class="data display">
+					<thead>
+						<tr>
+							<th></th>
+							<th>今天</th>
+							<th>昨天</th>
+							<th>本周</th>
+							<th>本月</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="odd gradeX">
+							<td>新闻</td>
+							<td>9</td>
+							<td>9</td>
+							<td class="center">9</td>
+							<td class="center">9</td>
+						</tr>
+						<tr class="even gradeC">
+							<td>博客</td>
+							<td>8</td>
+							<td>8</td>
+							<td class="center">8</td>
+							<td class="center">8</td>
+						</tr>
+						<tr class="odd gradeA">
+							<td>论坛</td>
+							<td>6</td>
+							<td>6</td>
+							<td class="center">6</td>
+							<td class="center">6</td>
+						</tr>
+						<tr class="even gradeA">
+							<td>负面</td>
+							<td>7</td>
+							<td>7</td>
+							<td class="center">7</td>
+							<td class="center">7</td>
+						</tr>
+						</tbody>
+					</table>
+					
+					<br /><br /><br />
 					
 					<h2>最新舆情</h2>
 				
@@ -11,8 +62,8 @@
 						<tr>
 							<th>最新舆情</th>
 							
-							<th>Engine version</th>
-							<th>CSS grade</th>
+							<th>时间</th>
+							<th>网站</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -75,55 +126,11 @@
 				</table>
 			
 		</div> <!-- .x12 -->
+		
+	</div> <!-- #content -->
+	
+</div> <!-- #wrapper -->
 
-
-		<div class="x12">
-			
-			<h2>统计信息</h2>
-				
-				<table class="data display">
-					<thead>
-						<tr>
-							<th></th>
-							<th>今天</th>
-							<th>昨天</th>
-							<th>本周</th>
-							<th>本月</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="odd gradeX">
-							<td>新闻</td>
-							<td>9</td>
-							<td>9</td>
-							<td class="center">9</td>
-							<td class="center">9</td>
-						</tr>
-						<tr class="even gradeC">
-							<td>博客</td>
-							<td>8</td>
-							<td>8</td>
-							<td class="center">8</td>
-							<td class="center">8</td>
-						</tr>
-						<tr class="odd gradeA">
-							<td>论坛</td>
-							<td>6</td>
-							<td>6</td>
-							<td class="center">6</td>
-							<td class="center">6</td>
-						</tr>
-						<tr class="even gradeA">
-							<td>负面</td>
-							<td>7</td>
-							<td>7</td>
-							<td class="center">7</td>
-							<td class="center">7</td>
-						</tr>
-						</tbody>
-					</table>
-					
-					<br /><br /><br />
 
 
 		{% endblock %}
