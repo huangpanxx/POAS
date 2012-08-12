@@ -7,7 +7,6 @@ import personal
 from django.contrib import admin
 from django.http import HttpResponseRedirect
 import wap
-import notifications
 
 admin.autodiscover()
 
@@ -22,12 +21,13 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     
     url(r'^grappelli/', include('grappelli.urls')),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login'), 
+    url(r'^accounts/profile/$',lambda x: HttpResponseRedirect('/')),
     url(r'^admin/super/', include(admin.site.urls)),
     url(r'^admin/$', lambda x: HttpResponseRedirect('./super/')),
     url(r'^admin/cs/', include(csadmin.urls)),
     url(r'^personal/', include(personal.urls)),
     url(r'^hot/', include(hot.urls)),
     url(r'^wap/', include(wap.urls)),
-    url(r'^notification/', include(notifications.urls.urlpatterns)),
-    
+    url(r'^inbox/', include('SS.notifications.urls')),
 ) 

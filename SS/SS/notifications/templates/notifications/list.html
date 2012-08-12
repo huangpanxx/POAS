@@ -1,43 +1,29 @@
 {% extends "base.html" %}
 {% load i18n notifications_unread %}
 
-{% notifications_unread as unread_count %}
+{% block head %}<title>站内信</title>{% endblock %}
 
-{% block title %}Notifications ({{ unread_count }}){% endblock %}
 
 {% block content %}
-    <h1 class="header">
-        Notifications ({{ unread_count }}) <a class="btn" href="{% url notifications_read_all %}">Mark all as read</a>
-    </h1>
 
-    <div class="activities">
-        {% for action in action_list %}
-            {# display action only when action_object exists #}
-            {% if action.action_object %}
-                <div class="act">
-                    <div class="body">
-                        <div class="title">
-                                <i class="{% if action.readed %}icon-mail{% else %}icon-mail-alt{% endif %}"></i>
-                                {% if action.actor.get_absolute_url %}
-                                    <a href="{{ action.actor.get_absolute_url }}">{{ action.actor }}</a>
-                                {% endif %}
+<h2 class="header">
+	站内信 (未读：{% notifications_unread %})
+</h2>
 
-                                {{ action.verb }}
+<div class="activities">
+	{% for action in action_list %}
+	<div class="" style="min-height:20px;">
+		<div class="body">
+			<h4 text-align="right">
+				{{ action.actor }} 发送于 {{action.timesince}}之前
+				</br>
+				<i class="{% if action.readed %}icon-mail{% else %}icon-mail-alt{% endif %}"> </i>
 
-                                <a href="{% url notifications_read action.slug %}?next={{ action.target.get_absolute_url }}">{{ action.target }}</a>
-                        </div>
-                        <div class="details">
-                            {% if action.description %}
-                                <div class="message">
-                                    <a href="{% url notifications_read action.slug %}?next={{ action.action_object.get_absolute_url }}">{{ action.description|linebreaksbr|atmention_str }}</a>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
-        {% empty %}
-            No notification.
-        {% endfor %}
-    </div>
+					{{ action.description|linebreaksbr}}
+			</h4>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+<a class="btn-icon btn-grey btn-comment" href="{% url notifications_read_all %}">标记所有为已读</a>
 {% endblock %}

@@ -26,7 +26,7 @@ DATABASES = {
         'NAME': 'hot', # Or path to database file if using sqlite3.
         'USER': 'poas', # Not used with sqlite3.
         'PASSWORD': 'poas', # Not used with sqlite3.
-        'HOST': '192.168.1.110', # Set to empty string for localhost. Not used with sqlite3.        'PORT': '', # Set to empty string for default. Not used with sqlite3.
+        'HOST': '192.168.50.205', # Set to empty string for localhost. Not used with sqlite3.        'PORT': '', # Set to empty string for default. Not used with sqlite3.
 		'PORT': '3306'
     },
     'cs':{
@@ -34,7 +34,7 @@ DATABASES = {
         'NAME': 'csmodel', # Or path to database file if using sqlite3.
         'USER': 'poas', # Not used with sqlite3.
         'PASSWORD': 'poas', # Not used with sqlite3.
-        'HOST': '192.168.1.110', # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': '192.168.50.205', # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306', # Set to empty string for default. Not used with sqlite3.
     },
 }
@@ -55,7 +55,7 @@ TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-cn'
 
 SITE_ID = 1
 
